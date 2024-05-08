@@ -1,0 +1,78 @@
+.sidebar {
+    background: var(--inverse);
+    grid-area: menu;
+}
+
+.menu-list {
+    margin-top: 1rem;
+    background: var(--inverse);
+    /* Use the inverse color */
+    list-style-type: none;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    color: var(--secondary);
+    /* Use the secondary color */
+}
+
+.menu-item a {
+    text-decoration: none;
+}
+
+.menu-item a button {
+    padding-left: initial;
+}
+
+.menu-item:hover {
+    background: var(--primary--hover);
+    /* Use the secondary hover color */
+}
+
+.menu-item:hover h4 {
+    color: var(--primary);
+    /* Use the primary color */
+}
+
+.menu-item:hover::after {
+    opacity: 1;
+    transform: translate(0, -50%);
+}
+
+.menu-item.is-active {
+    background: var(--primary);
+    color: var(--inverse);
+    /* Use the primary color */
+    /* Use the inverse color */
+}
+
+.menu-item.is-active::after {
+    background: var(--inverse);
+    /* Use the inverse color */
+    color: var(--primary);
+    /* Use the primary color */
+}
+
+.menu-item::after {
+    background: black;
+    border-radius: 3px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 300;
+    left: calc(200px + 10px);
+    /* Adjust this according to your needs */
+    opacity: 0;
+    padding: 0.25rem 0.5rem;
+    position: absolute;
+    top: 50%;
+    transform: translate(-200px, -50%);
+    transition: transform 0.25s ease-out, opacity 0.5s ease-in;
+    white-space: nowrap;
+}
+
+.MuiTypography-root {
+    font-family: "Poppins", sans-serif, sans-serif !important;
+    font-weight: 600 !important;
+}

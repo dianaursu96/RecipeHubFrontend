@@ -1,0 +1,21 @@
+.search__form-control form {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.search__form-control input {
+  border: none;
+  background-color: var(--inverse);
+}
+.search__form-control input:focus {
+  outline: solid 1px var(--primary);
+}
+.search__form-control button {
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  color: var(--secondary);
+  border: none;
+  background-color: var(--primary);
+  border-radius: 3px;
+}

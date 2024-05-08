@@ -1,0 +1,36 @@
+.pagination-container {
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    background: var(--secondary);
+    margin-top: 2em;
+    display: flex;
+    z-index: 9999;
+}
+
+.pagination {
+    display: flex;
+    width: 100%;
+    list-style: none;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.pagination li a {
+    font-size: 1.5em;
+    color: var(--primary);
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.pagination li.active a {
+    background-color: var(--primary-hover);
+    color: #fff;
+    border-radius: 5px;
+}
+
+.pagination li a:hover:not(.active) {
+    background-color: var(--inverse);
+}

@@ -1,0 +1,142 @@
+.signup__container {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.signup__container h1 {
+  display: flex;
+  font-weight: 900;
+  font-size: 2.4rem;
+}
+.signup__container span {
+  color: var(--secondary);
+}
+.signup__form-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2em 0;
+  width: 85vw;
+  text-align: left;
+}
+.signup__form-controls,
+.signup__invalid {
+  margin-bottom: 1.65em;
+  font-size: 0.8rem;
+}
+.signup__form-controls label {
+  color: var(--secondary);
+}
+.signup__invalid label {
+  color: red;
+}
+
+.signup__form-controls label > span {
+  color: var(--error);
+}
+.signup__invalid label >span {
+  color: red;
+}
+.signup__form-controls input,
+.signup__invalid input {
+  width: 100%;
+  padding: 1.2em;
+  display: inline-block;
+  border: none;
+}
+.signup__form-controls input {
+  background-color: var(--inverse);
+  color: var(--secondary);
+}
+.signup__invalid input {
+  background-color: var(--error);
+  color: var(--secondary);
+  border: 1px solid red;
+}
+
+.signup__invalid input:focus {
+  outline: none;
+}
+.signup__form-controls input:focus {
+  outline: solid 1px var(--primary);
+ 
+}
+.signup__invalid p {
+  color: red;
+}
+
+
+.signup__cta {
+  margin-top: 1.2em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.signup__cta button {
+  text-decoration: none;
+  margin: 0 auto;
+  padding: 1em 0.4em;
+  font-family: inherit;
+  width: 150px;
+  margin: 1em;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--secondary);
+  color: #fff;
+}
+.signup__cta a:hover,
+.signup__cta button:hover {
+  opacity: 0.4;
+}
+
+.signup__cta a:last-of-type {
+  color: var(--primary);
+}
+.signup__cta a:last-of-type {
+  font-size: 0.8rem;
+}
+
+/* tablet */
+@media screen and (min-width: 510px) and (max-width: 1023px) {
+  .signup__container h1 {
+    font-size: 3.6rem;
+    margin-bottom: 0.6em;
+  }
+
+  .signup__cta button {
+    width: 250px;
+    font-size: 1.4rem;
+  }
+  .signup__cta a:last-of-type {
+    font-size: 0.8rem;
+  }
+}
+
+/* laptop */
+@media screen and (min-width: 1024px) {
+  .signup__container h1 {
+    font-size: 5rem;
+    margin-bottom: 1.5em;
+    margin-bottom: 0.2em;
+  }
+
+  .signup__cta button {
+    padding: 1em 0.4em;
+    width: 350px;
+    font-size: 1.4rem;
+  }
+  .signup__form-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+    width: 65vw;
+    text-align: left;
+  }
+}

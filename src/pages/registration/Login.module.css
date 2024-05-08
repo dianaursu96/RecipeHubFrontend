@@ -1,0 +1,109 @@
+.login__container {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login__container h1 {
+  display: flex;
+  color: var(--primary);
+  font-weight: 900;
+  font-size: 2.4rem;
+}
+.login__container span {
+  color: var(--secondary);
+}
+.login__form-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+  width: 85vw;
+  text-align: left;
+}
+.login__form-container label {
+  font-size: 0.8rem;
+
+  margin: 1em 0;
+  color: var(--secondary);
+}
+.login__form-container input {
+  width: 100%;
+  padding: 1.2em;
+  display: inline-block;
+  border: none;
+  background-color: var(--inverse);
+  color: var(--secondary);
+}
+.login__cta {
+  margin-top: 3em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.login__cta button {
+  text-decoration: none;
+  margin: 0 auto;
+  padding: 1em 0.4em;
+  font-family: inherit;
+  width: 40%;
+  margin: 1em;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--primary);
+  color: #fff;
+}
+.login__cta a:hover {
+  opacity: 0.4;
+}
+
+.login__cta a:last-of-type {
+  color: var(--secondary);
+}
+.login__cta a:last-of-type {
+  font-size: 0.8rem;
+}
+
+/* tablet */
+@media screen and (min-width: 510px) and (max-width: 1023px) {
+  .login__container h1 {
+    font-size: 3.6rem;
+    margin-bottom: 0.6em;
+  }
+
+  .login__cta a:first-of-type {
+    width: 250px;
+    font-size: 1.4rem;
+  }
+  .login__cta a:last-of-type {
+    font-size: 1.2rem;
+  }
+}
+
+/* laptop */
+@media screen and (min-width: 1024px) {
+  .login__container h1 {
+    font-size: 5rem;
+    margin-bottom: 1.5em;
+    margin-bottom: 0.2em;
+  }
+
+  .login__cta a:first-of-type {
+    padding: 1em 0.4em;
+    width: 350px;
+    font-size: 1.2rem;
+  }
+  .login__form-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+    width: 65vw;
+    text-align: left;
+  }
+}

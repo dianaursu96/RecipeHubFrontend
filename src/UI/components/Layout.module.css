@@ -1,0 +1,42 @@
+/* Layout.module.css */
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.contentContainer {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    min-width: 180px;
+    background-color: #f0f0f0;
+    transition: width 0.2s ease-in-out;
+    overflow: hidden;
+}
+
+.sidebar.closed {
+    min-width: 60px;
+}
+
+.mainContent {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
+.toggleButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: none;
+}
+
+.sidebar.closed .toggleButton {
+    display: block;
+}

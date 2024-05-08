@@ -1,0 +1,32 @@
+.avatar__container {
+    border: none;
+    cursor: pointer;
+    padding: 0.8em;
+    border-radius: 40px;
+    background-color: var(--primary);
+    display: flex;
+    min-width: 130px;
+    text-align: center;
+    align-items: center;
+    font-size: 0.6rem;
+    font-weight: 800;
+    color: var(--secondary);
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+.avatar__image img {
+    display: block;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.avatar__text {
+    padding: inherit;
+    text-transform: capitalize;
+    color: white;
+    font-family: "Poppins", sans-serif, sans-serif;
+    font-weight: 600;
+}
