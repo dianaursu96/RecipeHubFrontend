@@ -19,18 +19,10 @@ const recipeSlice = createSlice({
       const searchedRecipe = action.payload.searchedRecipes;
       const favoriteRecipes = current(state.favorites);
 
-      // get ALL recipe URI from favorites
-      const favoriteRecipesURI = favoriteRecipes.map(
-        (recipe) => recipe.recipe.recipe.uri
-      );
-      // compare searched recipe URI to favorites URI
       // if match: create new property (isfavorite) to that object and include the recipe ID created from DB
       let transformedSearchRecipe = searchedRecipe.map((recipe) => {
-        if (favoriteRecipesURI.includes(recipe.recipe.uri)) {
-          const favoriteRecipeID = favoriteRecipes.find(
-            (favorite) => favorite.recipe.recipe.uri === recipe.recipe.uri
-          ).id;
-          return { ...recipe, isFavorite: true, recipeID: favoriteRecipeID };
+        if (favoriteRecipes.includes(recipe.id)) {
+          return { ...recipe, isFavorite: true };
         } else {
           return recipe;
         }

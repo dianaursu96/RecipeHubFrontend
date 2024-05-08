@@ -7,7 +7,6 @@ import SearchRecipe from "./components/SearchRecipe";
 import axios from "axios";
 
 const Home = () => {
-  const favoriteRecipes = useSelector((state) => state.recipes.favorites);
   const recipes = useSelector((state) => state.recipes.recipes);
   const searchInput = useSelector((state) => state.recipes.searchInput);
   const dispatch = useDispatch();
@@ -15,8 +14,6 @@ const Home = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  //API CALL using custom hook
 
   // GET ALL RECIPE FROM THIRD PARTY API
   useEffect(() => {
@@ -34,7 +31,6 @@ const Home = () => {
             dispatch(
               recipeActions.searchRecipeData({
                 searchedRecipes: res.data,
-                favoriteRecipes,
               })
             );
           } else {
@@ -51,7 +47,7 @@ const Home = () => {
     if (searchInput) {
       fetchData();
     }
-  }, [searchInput, favoriteRecipes, dispatch]);
+  }, [searchInput, dispatch]);
 
   // CONDITIONAL RENDERS
   const banner =
