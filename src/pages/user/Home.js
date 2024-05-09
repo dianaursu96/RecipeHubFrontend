@@ -9,45 +9,40 @@ import axios from "axios";
 const Home = () => {
   const recipes = useSelector((state) => state.recipes.recipes);
   const searchInput = useSelector((state) => state.recipes.searchInput);
-  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // GET ALL RECIPE FROM THIRD PARTY API
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      axios({
-        method: "GET",
-        url: `http://localhost:8081/reader/search?query=${searchInput}`,
-        headers: {
-          Authorization: "Bearer " + token,
-        },
+    setIsLoading(true);
+    axios({
+      method: "GET",
+      url: `http://localhost:8081/reader/search?query=${searchInput}`,
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(
+            recipeActions.searchRecipeData({
+              searchedRecipes: res.data,
+            })
+          );
+        } else {
+          alert(res.error.message);
+        }
+        setIsLoading(false);
       })
-        .then((res) => {
-          if (res.status === 200) {
-            dispatch(
-              recipeActions.searchRecipeData({
-                searchedRecipes: res.data,
-              })
-            );
-          } else {
-            alert(res.error.message);
-          }
-        })
-        .catch((err) => {
-          alert(err.message);
-          setError(err.message);
-        });
-      setIsLoading(false);
-    };
-
-    if (searchInput) {
-      fetchData();
-    }
-  }, [searchInput, dispatch]);
+      .catch((err) => {
+        alert(err.message);
+        setIsLoading(false);
+        setError(err);
+      });
+  }, [searchInput]);
 
   // CONDITIONAL RENDERS
   const banner =

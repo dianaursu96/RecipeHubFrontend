@@ -6,6 +6,7 @@ import axios from "axios";
 
 import { useDispatch } from "react-redux";
 import { authActions } from "../../redux/store/auth-slice";
+import { recipeActions } from "../../redux/store/recipe-slice";
 
 const Login = () => {
   const emailRef = useRef();
@@ -26,14 +27,16 @@ const Login = () => {
           localStorage.setItem(
             "userData",
             JSON.stringify({
-              uid: res.data.id,
+              id: res.data.id,
               token: res.data.token,
+              email: res.data.email,
               firstName: res.data.firstName,
               role: res.data.role,
-              favorites: res.data.favouriteRecipeIds,
+              favourites: res.data.favourites,
             })
           );
           dispatch(authActions.login(res.data));
+          dispatch(recipeActions.initializeFavourites(res.data.favourites));
           navigate("/");
         }
       })
@@ -71,7 +74,7 @@ const Login = () => {
 
         <div className={classes.login__cta}>
           <button>Login</button>
-          <Link to="/signup">No account yet? Click here</Link>
+          <Link to="/signup">No account yet? Click here to register</Link>
         </div>
       </form>
     </div>

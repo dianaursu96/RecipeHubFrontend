@@ -9,13 +9,12 @@ const RecipeList = ({ recipes }) => {
         <RecipeItem
           key={recipe.id}
           id={recipe.id}
-          image={recipe.image}
+          imageURL={recipe.imageURL}
           name={recipe.title}
           calories={recipe.calories}
-          time={recipe.totalTime}
-          mealType={recipe.mealType}
-          dishType={recipe.dishType}
-          cuisineType={recipe.cuisineType}
+          cookingTime={recipe.cookingTime}
+          tags={recipe.tags}
+          ingredients={recipe.ingredients}
           isFavorite={recipe.isFavorite}
         />
       ))}

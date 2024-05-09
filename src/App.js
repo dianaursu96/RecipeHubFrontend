@@ -12,6 +12,7 @@ import Favorites from "./pages/user/Favorites";
 import Layout from "./UI/components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./redux/store/auth-slice";
+import { recipeActions } from "./redux/store/recipe-slice";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -23,15 +24,15 @@ function App() {
     if (storedData && storedData.token) {
       dispatch(
         authActions.login({
-          uid: storedData.uid,
+          id: storedData.uid,
           token: storedData.token,
           firstName: storedData.firstName,
           role: storedData.role,
-          favorites: storedData.favorites,
         })
       );
+      dispatch(recipeActions.initializeFavourites(storedData.favourites));
     }
-  }, [dispatch]);
+  }, []);
 
   // Define routes based on user role
   const readerRoutes = (

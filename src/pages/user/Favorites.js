@@ -1,43 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./components/MainContent.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { recipeActions } from "../../redux/store/recipe-slice";
 import MainContent from "./components/MainContent";
-
+import Spinner from "../../UI/components/Spinner";
+import axios from "axios";
 
 const Favorites = () => {
-    const favorites = useSelector((state) => state.recipes.favorites);
+  const favorites = useSelector((state) => state.recipes.recipes);
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
 
-    // TRANSFORM DATA FROM FAVORITES REDUX STORE
-    const recipes = favorites.map((recipe) => {
-        return {
-            recipeID: recipe.id,
-            recipe: recipe.recipe.recipe,
-            _links: recipe.recipe._links,
-            uid: recipe.uid,
-            isFavorite: recipe.isFavorite,
-        };
-    });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    // CONDITIONAL RENDERS
-    const banner =
-        recipes.length > 0 ? (
-            <h1>
-                {recipes.length} <span>favorite recipes</span>
-            </h1>
-        ) : (
-            <h1>
-                {"Your"} <span>{"favorite recipes"}</span>
-            </h1>
-        );
+  useEffect(() => {
+    setIsLoading(true);
+    axios({
+      method: "GET",
+      url: `http://localhost:8081/reader/recipes/favourites`,
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(
+            recipeActions.searchRecipeData({
+              searchedRecipes: res.data,
+            })
+          );
+        } else {
+          alert(res.error.message);
+        }
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        alert(err.message);
+        setIsLoading(false);
+        setError(err);
+      });
+  }, []);
 
-    return (
-        <>
-            <div className="banner-container" id="recipes">
-                <div className="banner-title">{banner}</div>
-            </div>
-            <MainContent recipes={recipes} />
-        </>
+  // CONDITIONAL RENDERS
+  const banner =
+    favorites.length > 0 ? (
+      <h1>
+        {favorites.length} <span>favorite recipes</span>
+      </h1>
+    ) : (
+      <h1>
+        {"Your"} <span>{"favorite recipes"}</span>
+      </h1>
     );
+
+  return (
+    <>
+      <div className="banner-container" id="recipes">
+        <div className="banner-title">{banner}</div>
+      </div>
+      {isLoading && <Spinner />}
+      {error && (
+        <main id="main-content" className="main-content-container">
+          <h1>Error: {error.message}</h1>
+        </main>
+      )}
+      {!isLoading && !error && <MainContent recipes={favorites} />}
+    </>
+  );
 };
 
 export default React.memo(Favorites);
