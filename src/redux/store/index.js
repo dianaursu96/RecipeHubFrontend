@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import recipeReducer from "./recipe-slice";
+import readerReducer from "./reader-slice";
+import chefReducer from "./chef-slice";
 import authReducer from "./auth-slice";
 const store = configureStore({
   reducer: {
-    recipes: recipeReducer,
+    reader: readerReducer,
     auth: authReducer,
+    chef: chefReducer,
   },
 });
 

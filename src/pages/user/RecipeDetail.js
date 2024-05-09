@@ -15,11 +15,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../../UI/components/Spinner";
 import { useDispatch, useSelector } from "react-redux";
-import { recipeActions } from "../../redux/store/recipe-slice";
+import { readerActions } from "../../redux/store/reader-slice";
 
 const RecipeDetail = () => {
-  const recipes = useSelector((state) => state.recipes.recipes);
-  const favourites = useSelector((state) => state.recipes.favourites);
+  const recipes = useSelector((state) => state.reader.recipes);
+  const favourites = useSelector((state) => state.reader.favourites);
   const [recipe, setRecipe] = useState({});
   const token = useSelector((state) => state.auth.token);
   const location = useLocation();
@@ -104,7 +104,7 @@ const RecipeDetail = () => {
       .then((res) => {
         if (res.status === 200) {
           setIsFavorited(!favorited);
-          dispatch(recipeActions.initializeFavourites(res.data));
+          dispatch(readerActions.initializeFavourites(res.data));
           let userObject = JSON.parse(localStorage.getItem("userData"));
           userObject.favourites = res.data;
           // Store the updated user data back in localStorage

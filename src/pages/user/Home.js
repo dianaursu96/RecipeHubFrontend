@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { recipeActions } from "../../redux/store/recipe-slice";
+import { readerActions } from "../../redux/store/reader-slice";
 import MainContent from "./components/MainContent";
 import Spinner from "../../UI/components/Spinner";
 import SearchRecipe from "./components/SearchRecipe";
 import axios from "axios";
 
 const Home = () => {
-  const recipes = useSelector((state) => state.recipes.recipes);
-  const searchInput = useSelector((state) => state.recipes.searchInput);
+  const recipes = useSelector((state) => state.reader.recipes);
+  const searchInput = useSelector((state) => state.reader.searchInput);
   const token = useSelector((state) => state.auth.token);
 
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const Home = () => {
       .then((res) => {
         if (res.status === 200) {
           dispatch(
-            recipeActions.searchRecipeData({
+            readerActions.searchRecipeData({
               searchedRecipes: res.data,
             })
           );

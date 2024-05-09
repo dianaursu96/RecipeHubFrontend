@@ -5,7 +5,7 @@ import "./RecipeItem.css";
 import Card from "./Card";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { recipeActions } from "../../../redux/store/recipe-slice";
+import { readerActions } from "../../../redux/store/reader-slice";
 
 const RecipeItem = ({
   id,
@@ -41,7 +41,7 @@ const RecipeItem = ({
       .then((res) => {
         if (res.status === 200) {
           setFavorited(!favorited);
-          dispatch(recipeActions.initializeFavourites(res.data));
+          dispatch(readerActions.initializeFavourites(res.data));
           let userObject = JSON.parse(localStorage.getItem("userData"));
           userObject.favourites = res.data;
           // Store the updated user data back in localStorage

@@ -5,8 +5,8 @@ const initialState = {
   favourites: [],
   searchInput: "",
 };
-const recipeSlice = createSlice({
-  name: "recipes",
+const readerSlice = createSlice({
+  name: "reader",
   initialState,
   reducers: {
     initializeFavourites(state, action) {
@@ -41,5 +41,5 @@ const recipeSlice = createSlice({
     // },
   },
 });
-export const recipeActions = recipeSlice.actions;
-export default recipeSlice.reducer;
+export const readerActions = readerSlice.actions;
+export default readerSlice.reducer;

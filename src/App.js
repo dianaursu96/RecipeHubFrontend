@@ -12,7 +12,7 @@ import Favorites from "./pages/user/Favorites";
 import Layout from "./UI/components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./redux/store/auth-slice";
-import { recipeActions } from "./redux/store/recipe-slice";
+import { readerActions } from "./redux/store/reader-slice";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -30,7 +30,7 @@ function App() {
           role: storedData.role,
         })
       );
-      dispatch(recipeActions.initializeFavourites(storedData.favourites));
+      dispatch(readerActions.initializeFavourites(storedData.favourites));
     }
   }, []);
 

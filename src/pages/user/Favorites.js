@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./components/MainContent.css";
 import { useDispatch, useSelector } from "react-redux";
-import { recipeActions } from "../../redux/store/recipe-slice";
+import { readerActions, recipeActions } from "../../redux/store/reader-slice";
 import MainContent from "./components/MainContent";
 import Spinner from "../../UI/components/Spinner";
 import axios from "axios";
 
 const Favorites = () => {
-  const favorites = useSelector((state) => state.recipes.recipes);
+  const favorites = useSelector((state) => state.reader.recipes);
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ const Favorites = () => {
       .then((res) => {
         if (res.status === 200) {
           dispatch(
-            recipeActions.searchRecipeData({
+            readerActions.searchRecipeData({
               searchedRecipes: res.data,
             })
           );

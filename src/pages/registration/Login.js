@@ -6,7 +6,7 @@ import axios from "axios";
 
 import { useDispatch } from "react-redux";
 import { authActions } from "../../redux/store/auth-slice";
-import { recipeActions } from "../../redux/store/recipe-slice";
+import { readerActions } from "../../redux/store/reader-slice";
 
 const Login = () => {
   const emailRef = useRef();
@@ -36,7 +36,7 @@ const Login = () => {
             })
           );
           dispatch(authActions.login(res.data));
-          dispatch(recipeActions.initializeFavourites(res.data.favourites));
+          dispatch(readerActions.initializeFavourites(res.data.favourites));
           navigate("/");
         }
       })
