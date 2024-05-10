@@ -3,20 +3,40 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { TextField, Button } from "@mui/material";
 import { Pencil } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { chefActions } from "../../../redux/store/chef-slice";
 
 const ImageForm = ({ initialData, recipeId }) => {
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const { register, handleSubmit } = useForm({
-    defaultValues: { imageUrl: initialData.imageUrl },
+    defaultValues: { imageURL: initialData.imageURL },
   });
 
   const onSubmit = async (data) => {
     try {
-      await axios.patch(`/api/courses/${recipeId}`, data);
+      axios({
+        method: "PUT",
+        url: `http://localhost:8081/chef/recipes/update/${recipeId}`,
+        data: data,
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(chefActions.initializeDraft(res.data));
+          } else {
+            alert(res.error.message);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
       setIsEditing(false);
-      // router.refresh();
     } catch (error) {
-      console.error("Error updating image URL:", error);
+      console.error("Error updating title:", error);
     }
   };
 
@@ -49,7 +69,7 @@ const ImageForm = ({ initialData, recipeId }) => {
       {isEditing ? (
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField
-            {...register("imageUrl")}
+            {...register("imageURL")}
             label="Image URL"
             fullWidth
             variant="outlined"
@@ -61,9 +81,9 @@ const ImageForm = ({ initialData, recipeId }) => {
         </form>
       ) : (
         <img
-          src={initialData.imageUrl}
+          src={initialData.imageURL}
           alt="Recipe"
-          style={{ maxWidth: "100%", marginTop: "10px" }}
+          style={{ maxWidth: "20%", marginTop: "10px" }}
         />
       )}
     </div>

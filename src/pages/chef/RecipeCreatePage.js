@@ -9,8 +9,8 @@ import TitleForm from "./components/TitleForm";
 import CookingTimeForm from "./components/CookingTimeForm";
 import ImageForm from "./components/ImageForm";
 import CategoryForm from "./components/CategoryForm";
-import ChaptersForm from "./components/ChaptersForm";
-import CaloriesForm from "./components/CaloriesForm";
+import StepsForm from "./components/StepsForm";
+import NutritionalDataForm from "./components/NutritionalDataForm";
 import Spinner from "../../UI/components/Spinner";
 import { ListChecks } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -125,12 +125,6 @@ const RecipeCreatePage = ({}) => {
             marginTop: "16px",
           }}
         >
-          {/* <div>
-                        <TitleForm initialData={recipe} recipeId={recipe.id} />
-                        <CookingTimeForm initialData={recipe} recipeId={recipe.id} />
-                        <ImageForm initialData={recipe} recipeId={recipe.id} />
-                        <CategoryForm initialData={recipe} recipeId={recipe.id} />
-                    </div> */}
           <div
             style={{
               border: "1px solid #cbd5e0",
@@ -181,11 +175,9 @@ const RecipeCreatePage = ({}) => {
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <ListChecks size={24} />
-              <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>
-                Recipe Steps
-              </h2>
+              <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Steps</h2>
             </div>
-            <ChaptersForm initialData={recipe} recipeId={recipe.id} />
+            <StepsForm initialData={recipe} recipeId={recipe.id} />
           </div>
           <div
             style={{
@@ -196,9 +188,11 @@ const RecipeCreatePage = ({}) => {
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <ListChecks size={24} />
-              <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Calories</h2>
+              <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>
+                Nutritional facts
+              </h2>
             </div>
-            <CaloriesForm initialData={recipe} recipeId={recipe.id} />
+            <NutritionalDataForm initialData={recipe} recipeId={recipe.id} />
           </div>
           <div
             style={{

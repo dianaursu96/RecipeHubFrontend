@@ -3,20 +3,56 @@ import axios from "axios";
 import { Slider, Typography, Box, Button, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { Pencil } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { chefActions } from "../../../redux/store/chef-slice";
 
-const CalorieCalculator = ({ initialData, recipeId }) => {
-  const [values, setValues] = useState([33.33, 66.67]); // initial percentages for fats, carbs, and proteins
-  const [calories, setCalories] = useState(initialData.calories);
+const NutritionalDataForm = ({ initialData, recipeId }) => {
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
+  const [values, setValues] = useState(
+    initialData.calories !== 0
+      ? [
+          ((initialData.proteins * 4) / initialData.calories) * 100,
+          ((initialData.proteins + initialData.carbs * 4) /
+            initialData.calories) *
+            100,
+        ]
+      : [33.33, 66.67]
+  ); // initial percentages for fats, carbs, and proteins
+  const [calories, setCalories] = useState(initialData.calories ?? 0);
+  const [proteins, setProteins] = useState(initialData.proteins ?? 0);
+  const [carbs, setCarbs] = useState(initialData.carbs ?? 0);
+  const [fats, setFats] = useState(initialData.fats ?? 0);
   const [isEditing, setIsEditing] = useState(false);
   const { register, handleSubmit } = useForm({
-    defaultValues: { title: initialData.title },
+    defaultValues: { calories: initialData.calories },
   });
 
   const onSubmit = async (data) => {
+    data.protein = Number(proteins);
+    data.carb = Number(carbs);
+    data.fat = Number(fats);
+    data.calories = Number(data.calories);
     try {
-      await axios.patch(`/api/courses/${recipeId}`, data);
+      axios({
+        method: "PUT",
+        url: `http://localhost:8081/chef/recipes/update/${recipeId}`,
+        data: data,
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(chefActions.initializeDraft(res.data));
+          } else {
+            alert(res.error.message);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
       setIsEditing(false);
-      // router.refresh();
     } catch (error) {
       console.error("Error updating title:", error);
     }
@@ -24,6 +60,9 @@ const CalorieCalculator = ({ initialData, recipeId }) => {
 
   const handleChange = (event, newValue) => {
     setValues(newValue);
+    setProteins(calculateGrams(values[0], 4));
+    setCarbs(calculateGrams(values[1] - values[0], 4));
+    setFats(calculateGrams(100 - values[1], 9));
   };
 
   const calculateGrams = (percentage, caloriePerGram) => {
@@ -48,7 +87,7 @@ const CalorieCalculator = ({ initialData, recipeId }) => {
           fontWeight: "bold",
         }}
       >
-        <span>Total Calories</span>
+        <span>Nutritional facts / 100g</span>
         <Button onClick={() => setIsEditing(!isEditing)} variant="text">
           {isEditing ? "Cancel" : "Edit"}
           <Pencil
@@ -70,7 +109,6 @@ const CalorieCalculator = ({ initialData, recipeId }) => {
               onChange={(event) => setCalories(event.target.value)}
             />
             <Slider
-              aria-label="percentage-slider"
               value={values}
               onChange={handleChange}
               valueLabelDisplay="auto"
@@ -101,16 +139,13 @@ const CalorieCalculator = ({ initialData, recipeId }) => {
               }}
             >
               <Typography>
-                Proteins: {values[0].toFixed(0)}% (
-                {calculateGrams(values[0], 4)}g)
+                Proteins: {values[0].toFixed(0)}% ({proteins}g)
               </Typography>
               <Typography>
-                Carbs: {(values[1] - values[0]).toFixed(0)}% (
-                {calculateGrams(values[1] - values[0], 4)}g)
+                Carbs: {(values[1] - values[0]).toFixed(0)}% ({carbs}g)
               </Typography>
               <Typography>
-                Fats: {(100 - values[1]).toFixed(0)}% (
-                {calculateGrams(100 - values[1], 9)}g)
+                Fats: {(100 - values[1]).toFixed(0)}% ({fats}g)
               </Typography>
             </Box>
           </Box>
@@ -119,10 +154,13 @@ const CalorieCalculator = ({ initialData, recipeId }) => {
           </Button>
         </form>
       ) : (
-        <p>{initialData.calories}</p>
+        <p>
+          {initialData.calories} kcal | {initialData.protein}P |{" "}
+          {initialData.carb}C | {initialData.fat}F
+        </p>
       )}
     </div>
   );
 };
 
-export default CalorieCalculator;
+export default NutritionalDataForm;
