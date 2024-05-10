@@ -225,6 +225,9 @@ const RecipesTable = () => {
                 >
                   <MenuItem value="DESSERT">Dessert</MenuItem>
                   <MenuItem value="MAIN_DISH">Main Course</MenuItem>
+                  <MenuItem value="MAIN_DISH">Main Course</MenuItem>
+                  <MenuItem value="MAIN_DISH">Main Course</MenuItem>
+                  <MenuItem value="MAIN_DISH">Main Course</MenuItem>
                   {/* Add more categories as needed */}
                 </Select>
               </FormControl>

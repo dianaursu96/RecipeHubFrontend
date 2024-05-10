@@ -1,43 +1,43 @@
 .side-drawer {
-    display: flex;
-    justify-content: flex-start;
-    background-color: var(--primary);
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 250px;
-    padding-top: 80px;
-    z-index: 9;
-    border-radius: 0 0 0 15px;
+  display: flex;
+  justify-content: flex-start;
+  background-color: var(--primary);
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 250px;
+  padding-top: 80px;
+  padding-bottom: 10px;
+  z-index: 9;
+  border-radius: 0 0 0 15px;
 }
 
 .side-drawer ul {
-    width: 100%;
+  width: 100%;
 }
 
 .side-drawer li {
-    list-style: none;
+  list-style: none;
 }
 
 .side-drawer li a {
-    align-items: center;
-    gap: 40px;
-    color: var(--secondary);
-    font-size: 2em;
-    display: flex;
-    padding: 1em;
-    text-decoration: none;
-    color: white;
+  align-items: center;
+  gap: 20px;
+  font-size: 2em;
+  display: flex;
+  padding: 1em;
+  text-decoration: none;
+  color: var(--inverse);
 }
 
 .side-drawer a:hover {
-    background-color: var(--inverse);
-    color: var(--primary-hover);
-    opacity: 0.4;
+  background-color: var(--primary);
+  color: var(--primary-hover);
+  /* opacity: 0.8; */
 }
 
 .active-link {
-    background-color: var(--inverse);
-    color: var(--primary-hover);
-    opacity: 0.4;
+  background-color: var(--inverse);
+  color: var(--primary-hover);
+  opacity: 0.4;
 }

@@ -44,7 +44,6 @@ const Home = () => {
       });
   }, [searchInput]);
 
-  // CONDITIONAL RENDERS
   const banner =
     recipes.length > 0 ? (
       <h1>

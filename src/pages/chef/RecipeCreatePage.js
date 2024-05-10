@@ -11,13 +11,20 @@ import ImageForm from "./components/ImageForm";
 import CategoryForm from "./components/CategoryForm";
 import ChaptersForm from "./components/ChaptersForm";
 import CaloriesForm from "./components/CaloriesForm";
+import Spinner from "../../UI/components/Spinner";
 import { ListChecks } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { chefActions } from "../../redux/store/chef-slice";
 
 const RecipeCreatePage = ({}) => {
+  // const recipes = useSelector((state) => state.chef.recipes);
+  const recipe = useSelector((state) => state.chef.currentDraft);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   // const [recipe, setRecipe] = useState(null);
-  // const [categories, setCategories] = useState([]);
-  // const [loading, setLoading] = useState(true);
-
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  const { id: recipeId } = useParams();
   // useEffect(() => {
   //     const fetchData = async () => {
   //         try {
@@ -34,49 +41,49 @@ const RecipeCreatePage = ({}) => {
 
   //     fetchData();
   // }, [recipeId]);
-
-  // if (loading) {
-  //     return <CircularProgress />;
-  // }
-
-  // if (!recipe) {
-  //     return <Banner label="Recipe not found" />;
-  // }
-  const { id: recipeId } = useParams();
-
-  const recipe = {
-    id: recipeId,
-    isPublished: false,
-    title: "Recipe 1",
-    cookingTime: 25,
-    categoryId: 1,
-    // imageUrl: 'fasfasdf',
-    chapters: [
-      {
-        id: 1,
-        title: "Chop onions",
-        isPublished: true,
+  useEffect(() => {
+    // if (recipes?.length) {
+    //   setRecipe(recipes?.find((recipe) => recipe.id === recipeId));
+    //   return;
+    // }
+    setIsLoading(true);
+    axios({
+      method: "GET",
+      url: `http://localhost:8081/chef/recipes/${recipeId}`,
+      headers: {
+        Authorization: "Bearer " + token,
       },
-      {
-        id: 2,
-        title: "Cry",
-        isPublished: false,
-      },
-      {
-        id: 3,
-        title: "Eat",
-        isPublished: false,
-      },
-    ],
-    calories: 292,
-  };
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(chefActions.initializeDraft(res.data));
+          // setRecipe(currentDraft);
+        } else {
+          alert(res.error.message);
+        }
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        alert(err.message);
+        setIsLoading(false);
+        setError(err);
+      });
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (!recipe) {
+    return <Banner label="Recipe not found" />;
+  }
 
   const requiredFields = [
     recipe.title,
     recipe.description,
     recipe.imageUrl,
     recipe.categoryId,
-    recipe.chapters.some((chapter) => chapter.isPublished),
+    recipe.chapters?.some((chapter) => chapter.isPublished),
   ];
 
   const totalFields = requiredFields.length;

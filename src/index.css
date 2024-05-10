@@ -3,36 +3,37 @@
 *,
 ::after,
 :before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    /* colors */
-    --primary: #d44671;
-    --secondary: #2a3941;
-    --inverse: #eaf2eb;
-    --primary-opacity: #FFEDD3;
-    --primary-hover: #cd5f92;
-    --secondary-opacity: #607984;
-    --secondary-hover: #052231;
-    --error: #f1aba2;
+  /* colors */
+  --primary: #d44671;
+  --secondary: #2a3941;
+  --inverse: #eaeff3;
+  --primary-opacity: #db9ec0;
+  --primary-hover: #e298ae;
+  --secondary-opacity: #607984;
+  --secondary-hover: #052231;
+  --error: #f1aba2;
 }
 
 input {
-    font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
+  /*font-size: 12px;*/
 }
 
 body {
-    font-size: 10px;
-    width: 100%;
-    font-family: "Poppins", sans-serif;
+  font-size: 10px;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
 }
 
 /* mobile */
 @media screen and (min-width: 320px) {
-    body {
-        padding: 0 0.5em;
-    }
+  body {
+    padding: 0 0.5em;
+  }
 }

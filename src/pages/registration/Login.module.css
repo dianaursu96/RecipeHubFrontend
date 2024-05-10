@@ -59,7 +59,9 @@
   background: var(--primary);
   color: #fff;
 }
-.login__cta a:hover {
+
+.login__cta a:hover,
+.login__cta button:hover {
   opacity: 0.4;
 }
 

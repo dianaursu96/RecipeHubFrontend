@@ -34,7 +34,6 @@ function App() {
     }
   }, []);
 
-  // Define routes based on user role
   const readerRoutes = (
     <>
       <Route

@@ -1,19 +1,14 @@
 import React, { Fragment, useState, useEffect } from "react";
-import {
-  FaFireAlt,
-  FaRegClock,
-  FaRegCheckCircle,
-  FaHeart,
-  FaArrowLeft,
-} from "react-icons/fa";
+import { FaFireAlt, FaRegClock, FaHeart, FaArrowLeft } from "react-icons/fa";
+import { IoIosCheckbox } from "react-icons/io";
 import classes from "./RecipeDetail.module.css";
-import { Link } from "react-router-dom";
 import book from "../../assets/images/book.png";
 import ingredientImage from "../../assets/images/ingredients.png";
 import nutritionImage from "../../assets/images/nutirtion.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../../UI/components/Spinner";
+import { MdLocalFireDepartment } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { readerActions } from "../../redux/store/reader-slice";
 
@@ -60,7 +55,7 @@ const RecipeDetail = () => {
       });
   }, []);
 
-  const calorie = isNaN(Math.floor(recipe?.calories))
+  const calories = isNaN(Math.floor(recipe?.calories))
     ? "No calories"
     : Math.floor(recipe?.calories) + " calories";
   const time =
@@ -71,25 +66,33 @@ const RecipeDetail = () => {
   const ingredients = recipe?.ingredients?.split("|").map((ingredient) => (
     <li>
       <span>
-        <FaRegCheckCircle />
+        <IoIosCheckbox />
         {ingredient}
       </span>
     </li>
   ));
+
   const steps = recipe?.steps?.split("|").map((ingredient, i) => (
     <li>
       <span>
-        Step {i + 1}: {ingredient}
+        <b>Step {i + 1}:</b> {ingredient}
       </span>
     </li>
   ));
-  const nutrients =
-    recipe?.totalNutrients &&
-    Object.entries(recipe?.totalNutrients).map(([keys, nutrient]) => (
-      <li>
-        {nutrient.label} - {Math.floor(nutrient.quantity)} {nutrient.unit}
-      </li>
-    ));
+
+  const nutrientsData = [
+    { label: "Calories", value: `${recipe?.calories} kcal` },
+    { label: "Protein", value: `${recipe?.protein}g` },
+    { label: "Fat", value: `${recipe?.fat}g` },
+    { label: "Carb", value: `${recipe?.carb}g` },
+  ];
+  const nutrientList = nutrientsData.map((nutrient) => (
+    <li key={nutrient.label}>
+      <span>
+        <MdLocalFireDepartment /> <b>{nutrient.label}</b> : {nutrient.value}
+      </span>
+    </li>
+  ));
 
   const favouriteHandler = () => {
     axios({
@@ -119,24 +122,24 @@ const RecipeDetail = () => {
   };
 
   // SHOWING BUTTON DEPENDING ON THE ISFAVORITE STATE
-  const favoriteButton = !!favorited ? (
+  const favoriteButton = favorited ? (
     <button
       onClick={favouriteHandler}
       style={{
         background: "var(--primary)",
-        color: "var(--primary-opacity",
+        color: "var(--inverse)",
       }}
     >
       <span>
         <FaHeart />
-        Remove from Favorites
+        Remove from Favourites
       </span>
     </button>
   ) : (
     <button onClick={favouriteHandler}>
       <span>
         <FaHeart />
-        Add to Favorites
+        Add to Favourites
       </span>
     </button>
   );
@@ -159,7 +162,7 @@ const RecipeDetail = () => {
                   <span>
                     <FaFireAlt />
                   </span>
-                  <span>{calorie}</span>
+                  <span>{calories}</span>
                 </div>
                 <div>
                   <span>
@@ -171,12 +174,12 @@ const RecipeDetail = () => {
               <div className={classes["recipe-tag-group"]}>{tags}</div>
             </div>
 
-            <div className={classes["recipe__preparation"]}>
+            <div className={classes["recipe-preparation"]}>
               <div>
                 <img src={book} />
               </div>
               <h3>How to prepare?</h3>
-              {steps}
+              <ul>{steps}</ul>
             </div>
             <div className={classes["recipe-ingredients"]}>
               <div>
@@ -189,8 +192,8 @@ const RecipeDetail = () => {
               <div>
                 <img src={nutritionImage} />
               </div>
-              <h3>Nutrional facts</h3>
-              <ul>{nutrients}</ul>
+              <h3>Nutritional facts / 100g</h3>
+              <ul>{nutrientList}</ul>
             </div>
 
             <div className={classes["favorites-button-group"]}>
@@ -198,7 +201,7 @@ const RecipeDetail = () => {
               <button onClick={() => navigate(-1)}>
                 <span>
                   <FaArrowLeft />
-                  Go Back
+                  Go to previous page
                 </span>
               </button>
             </div>

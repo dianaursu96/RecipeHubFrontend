@@ -50,7 +50,7 @@ const CalorieCalculator = ({ initialData, recipeId }) => {
       >
         <span>Total Calories</span>
         <Button onClick={() => setIsEditing(!isEditing)} variant="text">
-          {isEditing ? "Cancel" : "Edit calories"}
+          {isEditing ? "Cancel" : "Edit"}
           <Pencil
             style={{ width: "16px", height: "16px", marginLeft: "5px" }}
           />

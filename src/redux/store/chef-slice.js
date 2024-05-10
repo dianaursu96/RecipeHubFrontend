@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   drafts: [],
+  currentDraft: {},
 };
 const chefSlice = createSlice({
   name: "chef",
@@ -12,6 +13,9 @@ const chefSlice = createSlice({
     },
     addNewDraft(state, action) {
       state.drafts = [...state.drafts, action.payload];
+    },
+    initializeDraft(state, action) {
+      state.currentDraft = { ...action.payload };
     },
   },
 });

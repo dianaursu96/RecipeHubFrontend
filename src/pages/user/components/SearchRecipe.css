@@ -6,6 +6,7 @@
 .search__form-control input {
   border: none;
   background-color: var(--inverse);
+  outline: solid 1px var(--inverse);
 }
 .search__form-control input:focus {
   outline: solid 1px var(--primary);
@@ -14,8 +15,9 @@
   cursor: pointer;
   height: 100%;
   width: 100%;
-  color: var(--secondary);
+  color: var(--inverse);
   border: none;
+  outline: solid 1px var(--primary);
   background-color: var(--primary);
   border-radius: 3px;
 }

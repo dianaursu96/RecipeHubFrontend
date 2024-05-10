@@ -1,21 +1,60 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { TextField, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { Pencil } from "lucide-react";
 import DurationPicker from "react-duration-picker";
+import { useDispatch, useSelector } from "react-redux";
+import { chefActions } from "../../../redux/store/chef-slice";
 
-const DescriptionForm = ({ initialData, recipeId }) => {
+const CookingTimeForm = ({ initialData, recipeId }) => {
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const { register, handleSubmit } = useForm({
-    defaultValues: { cookingTime: initialData.cookingTime },
-  });
+  const [cookingTime, setCookingTime] = useState(initialData.cookingTime);
+  const onChange = (duration) => {
+    const { hours, minutes } = duration;
+    setCookingTime(hours * 60 + minutes);
+  };
+  const convertMinutesToHoursAndMinutes = (initialCookingTime) => {
+    // Calculate the number of whole hours
+    const hours = Math.floor(initialCookingTime / 60);
+
+    // Calculate the remaining minutes
+    const minutes = initialCookingTime % 60;
+
+    return {
+      hours,
+      minutes,
+    };
+  };
+  const initialDuration = convertMinutesToHoursAndMinutes(
+    initialData.cookingTime
+  );
 
   const onSubmit = async (data) => {
     try {
-      await axios.patch(`/api/courses/${recipeId}`, data);
+      axios({
+        method: "PUT",
+        url: `http://localhost:8081/chef/recipes/update/${recipeId}`,
+        data: {
+          cookingTime: cookingTime,
+        },
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(chefActions.initializeDraft(res.data));
+          } else {
+            alert(res.error.message);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
       setIsEditing(false);
-      // router.refresh();
     } catch (error) {
       console.error("Error updating description:", error);
     }
@@ -41,24 +80,28 @@ const DescriptionForm = ({ initialData, recipeId }) => {
       >
         <span>Cooking Time</span>
         <Button onClick={() => setIsEditing(!isEditing)} variant="text">
-          {isEditing ? "Cancel" : "Edit cooking time"}
+          {isEditing ? "Cancel" : "Edit"}
           <Pencil
             style={{ width: "16px", height: "16px", marginLeft: "5px" }}
           />
         </Button>
       </div>
       {isEditing ? (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <DurationPicker initialDuration={{ ...register("cookingTime") }} />
+        <form onSubmit={onSubmit}>
+          <DurationPicker
+            onChange={onChange}
+            initialDuration={initialDuration}
+          />
           <Button type="submit" variant="contained" size="small">
             Save
           </Button>
         </form>
       ) : (
-        <p>{initialData.cookingTime}</p>
+        // <p>{initialData.cookingTime}</p>
+        <p>{`${initialDuration.hours}h ${initialDuration.minutes}min`}</p>
       )}
     </div>
   );
 };
 
-export default DescriptionForm;
+export default CookingTimeForm;

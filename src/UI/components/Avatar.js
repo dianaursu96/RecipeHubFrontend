@@ -6,14 +6,14 @@ import profile from "../../assets/images/profile.png";
 
 const Avatar = () => {
   const firstName = useSelector((state) => state.auth.firstName);
-  const [showPanel, setShowPanel] = useState(false);
-  const showPanelToggler = () => {
-    !showPanel ? setShowPanel(true) : setShowPanel(false);
+  const [openPanel, setOpenPanel] = useState(false);
+  const togglePanel = () => {
+    setOpenPanel(!openPanel);
   };
   return (
     <>
-      {showPanel && <SideDrawer />}
-      <button onClick={showPanelToggler} className={classes.avatar__container}>
+      {openPanel && <SideDrawer />}
+      <button onClick={togglePanel} className={classes.avatar__container}>
         <div className={classes.avatar__image}>
           <img src={profile} />
         </div>
