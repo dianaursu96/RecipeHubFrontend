@@ -1,0 +1,151 @@
+import React, { useState } from "react";
+import { TextField, Button, IconButton } from "@mui/material";
+import { Pencil, Trash } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { chefActions } from "../../../redux/store/chef-slice";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+
+const TagsForm = ({ initialData, recipeId }) => {
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [tags, setTags] = useState(
+    initialData.tags
+      ? initialData.tags
+          .split(",")
+          .map((tag) => (tag.startsWith("#") ? tag : `#${tag}`))
+      : []
+  );
+  const [newTag, setNewTag] = useState("");
+
+  const handleAddTag = () => {
+    if (newTag.trim() !== "" && !tags.includes(newTag.trim())) {
+      setTags([...tags, newTag]);
+      setNewTag("");
+    }
+  };
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleAddTag();
+    }
+  };
+
+  const handleDeleteTag = (index) => {
+    const updatedTags = tags.filter((_, i) => i !== index);
+    setTags(updatedTags);
+  };
+
+  const handleSave = async () => {
+    try {
+      const formattedTags = tags.join(",");
+      axios({
+        method: "PUT",
+        url: `http://localhost:8081/chef/recipes/update/${recipeId}`,
+        data: { tags: formattedTags },
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(chefActions.initializeDraft(res.data));
+          } else {
+            alert(res.error.message);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error updating steps:", error);
+    }
+  };
+
+  return (
+    <div
+      style={{
+        border: "1px solid #ccc",
+        backgroundColor: "#f3f4f6",
+        borderRadius: "5px",
+        padding: "10px",
+        marginTop: "10px",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          fontWeight: "bold",
+        }}
+      >
+        <span>Recipe Tags</span>
+        <Button onClick={() => setIsEditing(!isEditing)} variant="text">
+          {isEditing ? "Cancel" : "Edit"}
+          <Pencil
+            style={{ width: "16px", height: "16px", marginLeft: "5px" }}
+          />
+        </Button>
+      </div>
+
+      {isEditing ? (
+        <div>
+          <Stack direction="row" spacing={1}>
+            {tags.map((tag, index) => (
+              <Chip
+                key={index}
+                label={`#${tag}`}
+                onDelete={() => handleDeleteTag(index)}
+                style={{ margin: "5px" }}
+              />
+            ))}
+          </Stack>
+
+          <div
+            style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
+          >
+            <TextField
+              value={newTag}
+              onChange={(e) => setNewTag(e.target.value)}
+              onKeyPress={handleKeyPress}
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              placeholder="Add new tag"
+            />
+            <Button
+              onClick={handleAddTag}
+              variant="contained"
+              size="small"
+              style={{ marginLeft: "10px" }}
+            >
+              Add Tag
+            </Button>
+          </div>
+
+          <Button
+            onClick={handleSave}
+            variant="contained"
+            size="small"
+            style={{ marginTop: "10px" }}
+          >
+            Save
+          </Button>
+        </div>
+      ) : (
+        <Stack direction="row" spacing={1}>
+          {tags.map((tag, index) => (
+            <Chip key={index} label={`#${tag}`} style={{ margin: "5px" }} />
+          ))}
+        </Stack>
+      )}
+    </div>
+  );
+};
+
+export default TagsForm;

@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Button, Modal } from "@mui/material";
 import { Trash } from "lucide-react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { chefActions } from "../../../redux/store/chef-slice";
 
 const Actions = ({ disabled, recipeId, isPublished }) => {
   const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
@@ -15,13 +17,23 @@ const Actions = ({ disabled, recipeId, isPublished }) => {
     try {
       setIsLoading(true);
 
-      if (isPublished) {
-        await axios.patch(`/api/courses/${recipeId}/unpublish`);
-      } else {
-        await axios.patch(`/api/courses/${recipeId}/publish`);
-      }
-
-      // router.refresh();
+      axios({
+        method: "PUT",
+        url: `http://localhost:8081/chef/recipes/publish/${recipeId}`,
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(chefActions.initializeDraft(res.data));
+          } else {
+            alert(res.error.message);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
     } catch {
       console.error("Error publishing/unpublishing recipe");
     } finally {

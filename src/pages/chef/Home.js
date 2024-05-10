@@ -20,6 +20,29 @@ import { FormControl, InputLabel, Input, Modal } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../redux/store/chef-slice";
 
+const options = [
+  {
+    label: "Main Dish",
+    value: "MAIN_DISH",
+  },
+  {
+    label: "Breakfast",
+    value: "BREAKFAST",
+  },
+  {
+    label: "Dessert",
+    value: "DESSERT",
+  },
+  {
+    label: "Drinks",
+    value: "DRINKS",
+  },
+  {
+    label: "Snack",
+    value: "SNACK",
+  },
+];
+
 const RecipesTable = () => {
   const rows = useSelector((state) => state.chef.drafts);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -144,7 +167,12 @@ const RecipesTable = () => {
                       <FaBook /> {row.title}
                     </span>
                   </TableCell>
-                  <TableCell align="right">{row.category}</TableCell>
+                  <TableCell align="right">
+                    {
+                      options.find((option) => option.value === row.category)
+                        .label
+                    }
+                  </TableCell>
                   <TableCell align="right">
                     <Badge
                       color={row.isPublished ? "success" : "info"}
@@ -223,11 +251,11 @@ const RecipesTable = () => {
                   onChange={(e) => setNewRecipeCategory(e.target.value)}
                   style={{ fontFamily: "var(--font-family)" }}
                 >
-                  <MenuItem value="DESSERT">Dessert</MenuItem>
-                  <MenuItem value="MAIN_DISH">Main Course</MenuItem>
-                  <MenuItem value="MAIN_DISH">Main Course</MenuItem>
-                  <MenuItem value="MAIN_DISH">Main Course</MenuItem>
-                  <MenuItem value="MAIN_DISH">Main Course</MenuItem>
+                  {options.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
                   {/* Add more categories as needed */}
                 </Select>
               </FormControl>

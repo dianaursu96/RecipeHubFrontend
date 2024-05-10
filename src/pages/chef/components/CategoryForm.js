@@ -7,21 +7,29 @@ import { Pencil } from "lucide-react";
 const CategoryForm = ({ initialData, recipeId }) => {
   const options = [
     {
-      label: "vegan",
-      value: 1,
+      label: "Main Dish",
+      value: "MAIN_DISH",
     },
     {
-      label: "veggie",
-      value: 2,
+      label: "Breakfast",
+      value: "BREAKFAST",
     },
     {
-      label: "normal",
-      value: 3,
+      label: "Dessert",
+      value: "DESSERT",
+    },
+    {
+      label: "Drinks",
+      value: "DRINKS",
+    },
+    {
+      label: "Snack",
+      value: "SNACK",
     },
   ];
   const [isEditing, setIsEditing] = useState(false);
   const { register, handleSubmit } = useForm({
-    defaultValues: { categoryId: initialData.categoryId },
+    defaultValues: { category: initialData.category },
   });
 
   const onSubmit = async (data) => {
@@ -63,7 +71,7 @@ const CategoryForm = ({ initialData, recipeId }) => {
       {isEditing ? (
         <form onSubmit={handleSubmit(onSubmit)}>
           <Select
-            {...register("categoryId")}
+            {...register("category")}
             select
             label="Category"
             fullWidth
@@ -83,7 +91,7 @@ const CategoryForm = ({ initialData, recipeId }) => {
       ) : (
         <p>
           {
-            options.find((option) => option.value === initialData.categoryId)
+            options.find((option) => option.value === initialData.category)
               ?.label
           }
         </p>

@@ -15,6 +15,8 @@ import Spinner from "../../UI/components/Spinner";
 import { ListChecks } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../redux/store/chef-slice";
+import IngredientsForm from "./components/IngredientsForm";
+import TagsForm from "./components/TagsForm";
 
 const RecipeCreatePage = ({}) => {
   // const recipes = useSelector((state) => state.chef.recipes);
@@ -80,10 +82,12 @@ const RecipeCreatePage = ({}) => {
 
   const requiredFields = [
     recipe.title,
-    recipe.description,
-    recipe.imageUrl,
-    recipe.categoryId,
-    recipe.chapters?.some((chapter) => chapter.isPublished),
+    recipe.cookingTime,
+    recipe.imageURL,
+    recipe.ingredients,
+    recipe.steps,
+    recipe.category,
+    recipe.tags,
   ];
 
   const totalFields = requiredFields.length;
@@ -175,6 +179,21 @@ const RecipeCreatePage = ({}) => {
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <ListChecks size={24} />
+              <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>
+                Ingredients
+              </h2>
+            </div>
+            <IngredientsForm initialData={recipe} recipeId={recipe.id} />
+          </div>
+          <div
+            style={{
+              border: "1px solid #cbd5e0",
+              borderRadius: "4px",
+              padding: "16px",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <ListChecks size={24} />
               <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Steps</h2>
             </div>
             <StepsForm initialData={recipe} recipeId={recipe.id} />
@@ -203,10 +222,23 @@ const RecipeCreatePage = ({}) => {
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <ListChecks size={24} />
-              <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Tags</h2>
+              <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Category</h2>
             </div>
             <CategoryForm initialData={recipe} recipeId={recipe.id} />
           </div>
+        </div>
+        <div
+          style={{
+            border: "1px solid #cbd5e0",
+            borderRadius: "4px",
+            padding: "16px",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <ListChecks size={24} />
+            <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Tags</h2>
+          </div>
+          <TagsForm initialData={recipe} recipeId={recipe.id} />
         </div>
       </div>
     </>
