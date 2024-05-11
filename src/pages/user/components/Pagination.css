@@ -26,7 +26,7 @@
 }
 
 .pagination li.active a {
-  background-color: var(--primary-hover);
+  background-color: var(--primary);
   color: #eadae4;
   border-radius: 5px;
 }

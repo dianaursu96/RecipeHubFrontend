@@ -4,6 +4,7 @@ const initialState = {
   recipes: [],
   favourites: [],
   searchInput: "",
+  currentCategory: "",
 };
 const readerSlice = createSlice({
   name: "reader",
@@ -12,8 +13,11 @@ const readerSlice = createSlice({
     initializeFavourites(state, action) {
       state.favourites = [...action.payload];
     },
-    getSearchInput(state, action) {
+    setSearchInput(state, action) {
       state.searchInput = action.payload;
+    },
+    setCurrentCategory(state, action) {
+      state.currentCategory = action.payload;
     },
     searchRecipeData(state, action) {
       const searchedRecipe = action.payload.searchedRecipes;

@@ -5,10 +5,12 @@ import MainContent from "./components/MainContent";
 import Spinner from "../../UI/components/Spinner";
 import SearchRecipe from "./components/SearchRecipe";
 import axios from "axios";
+import CategoryBar from "./components/CategoryBar";
 
 const Home = () => {
   const recipes = useSelector((state) => state.reader.recipes);
   const searchInput = useSelector((state) => state.reader.searchInput);
+  const currentCategory = useSelector((state) => state.reader.currentCategory);
   const token = useSelector((state) => state.auth.token);
 
   const dispatch = useDispatch();
@@ -20,7 +22,7 @@ const Home = () => {
     setIsLoading(true);
     axios({
       method: "GET",
-      url: `http://localhost:8081/reader/search?query=${searchInput}`,
+      url: `http://localhost:8081/reader/search?query=${searchInput}&category=${currentCategory}`,
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -42,12 +44,15 @@ const Home = () => {
         setIsLoading(false);
         setError(err);
       });
-  }, [searchInput]);
+  }, [searchInput, currentCategory]);
 
   const banner =
-    recipes.length > 0 ? (
+    searchInput !== "" ? (
       <h1>
-        {recipes.length} <span>Recipes Found</span>
+        {recipes.length}{" "}
+        <span>
+          Recipes Found {searchInput !== "" ? `for '${searchInput}'` : ""}
+        </span>
       </h1>
     ) : (
       <h1>
@@ -67,7 +72,12 @@ const Home = () => {
           <h1>Error: {error.message}</h1>
         </main>
       )}
-      {!isLoading && !error && <MainContent recipes={recipes} />}
+      {!isLoading && !error && (
+        <>
+          <CategoryBar />
+          <MainContent recipes={recipes} />
+        </>
+      )}
     </>
   );
 };

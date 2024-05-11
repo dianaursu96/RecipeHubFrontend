@@ -9,8 +9,8 @@ const SearchRecipe = (props) => {
   const searchInputRef = useRef();
   const submitSearch = (e) => {
     e.preventDefault();
-    dispatch(readerActions.getSearchInput(searchInputRef.current.value));
-    searchInputRef.current.value = "";
+    dispatch(readerActions.setSearchInput(searchInputRef.current.value));
+    // searchInputRef.current.value = "";
   };
   return (
     <div className={`search__form-control ${props.className}`}>
