@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5em 7em 0em 7em;
+  padding: 5em 5em 2em 5em;
   gap: 20px;
   flex-wrap: wrap;
 }
@@ -39,7 +39,9 @@
 }
 
 .main-content-container {
-  padding: 0 3em;
+  padding: 1em 2em 8em 2em;
+  /* overflow-y: auto; */
+  /* padding-bottom: 2em; */
 }
 
 .no-content-container {

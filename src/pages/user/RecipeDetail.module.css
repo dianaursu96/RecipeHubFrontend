@@ -266,7 +266,9 @@ span {
 @media screen and (min-width: 620px) {
   .recipe__container {
     row-gap: 20px;
-    padding: 2em;
+    /* padding: 2em; */
+    padding-top: 5em;
+    padding-bottom: 5em;
     grid-template-rows: 0.2fr 0.3fr 0.3fr 0;
     grid-template-columns: 1fr 1fr 1fr;
     text-align: center;
@@ -323,7 +325,9 @@ span {
 
 @media screen and (min-width: 925px) {
   .recipe__container {
-    padding: 6em;
+    /* padding: 6em; */
+    padding-top: 5em;
+    padding-bottom: 5em;
     grid-auto-columns: 1fr;
     grid-template-columns: 1fr 0.9fr 1.1fr;
 
