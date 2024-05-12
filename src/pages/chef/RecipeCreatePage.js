@@ -12,7 +12,17 @@ import CategoryForm from "./components/CategoryForm";
 import StepsForm from "./components/StepsForm";
 import NutritionalDataForm from "./components/NutritionalDataForm";
 import Spinner from "../../UI/components/Spinner";
-import { ListChecks } from "lucide-react";
+import {
+  ListChecks,
+  Captions,
+  Image,
+  Clock8,
+  Route,
+  Flame,
+  Tag,
+  Salad,
+  Utensils,
+} from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../redux/store/chef-slice";
 import IngredientsForm from "./components/IngredientsForm";
@@ -118,7 +128,7 @@ const RecipeCreatePage = ({}) => {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <ListChecks size={24} />
+              <Captions size={24} />
               <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Title</h2>
             </div>
             <TitleForm initialData={recipe} recipeId={recipe.id} />
@@ -131,7 +141,7 @@ const RecipeCreatePage = ({}) => {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <ListChecks size={24} />
+              <Clock8 size={24} />
               <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>
                 Cooking Time
               </h2>
@@ -146,7 +156,7 @@ const RecipeCreatePage = ({}) => {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <ListChecks size={24} />
+              <Image size={24} />
               <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Image</h2>
             </div>
             <ImageForm initialData={recipe} recipeId={recipe.id} />
@@ -174,7 +184,7 @@ const RecipeCreatePage = ({}) => {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <ListChecks size={24} />
+              <Route size={24} />
               <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Steps</h2>
             </div>
             <StepsForm initialData={recipe} recipeId={recipe.id} />
@@ -187,7 +197,7 @@ const RecipeCreatePage = ({}) => {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <ListChecks size={24} />
+              <Flame size={24} />
               <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>
                 Nutritional facts
               </h2>
@@ -202,7 +212,7 @@ const RecipeCreatePage = ({}) => {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <ListChecks size={24} />
+              <Utensils size={24} />
               <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Category</h2>
             </div>
             <CategoryForm initialData={recipe} recipeId={recipe.id} />
@@ -216,7 +226,7 @@ const RecipeCreatePage = ({}) => {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <ListChecks size={24} />
+            <Tag size={24} />
             <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Tags</h2>
           </div>
           <TagsForm initialData={recipe} recipeId={recipe.id} />

@@ -58,10 +58,15 @@ const CategoryForm = ({ initialData, recipeId }) => {
           justifyContent: "space-between",
           alignItems: "center",
           fontWeight: "bold",
+          fontSize: "small",
         }}
       >
-        <span>Recipe category</span>
-        <Button onClick={() => setIsEditing(!isEditing)} variant="text">
+        <span>Edit category:</span>
+        <Button
+          onClick={() => setIsEditing(!isEditing)}
+          style={{ color: "var(--primary)", borderColor: "var(--primary)" }}
+          variant="text"
+        >
           {isEditing ? "Cancel" : "Edit"}
           <Pencil
             style={{ width: "16px", height: "16px", marginLeft: "5px" }}
@@ -84,7 +89,24 @@ const CategoryForm = ({ initialData, recipeId }) => {
               </MenuItem>
             ))}
           </Select>
-          <Button type="submit" variant="contained" size="small">
+          <Button
+            type="submit"
+            variant="contained"
+            style={{
+              marginTop: "10px",
+              background: "var(--primary)",
+              color: "var(--inverse)",
+              fontFamily: "var(--font-family)",
+              fontWeight: "bold",
+              borderRadius: "8%",
+              textTransform: "None",
+              "&:hover": {
+                background: "var(--primary)",
+                color: "var(--inverse)",
+              },
+            }}
+            size="small"
+          >
             Save
           </Button>
         </form>

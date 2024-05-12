@@ -71,10 +71,15 @@ const IngredientsForm = ({ initialData, recipeId }) => {
           justifyContent: "space-between",
           alignItems: "center",
           fontWeight: "bold",
+          fontSize: "small",
         }}
       >
-        <span>Recipe Ingredients</span> {/* Updated label */}
-        <Button onClick={() => setIsEditing(!isEditing)} variant="text">
+        <span>Edit ingredients:</span> {/* Updated label */}
+        <Button
+          onClick={() => setIsEditing(!isEditing)}
+          style={{ color: "var(--primary)", borderColor: "var(--primary)" }}
+          variant="text"
+        >
           {isEditing ? "Cancel" : "Edit"}
           <Pencil
             style={{ width: "16px", height: "16px", marginLeft: "5px" }}
@@ -115,6 +120,7 @@ const IngredientsForm = ({ initialData, recipeId }) => {
               margin="normal"
             />
             <Button
+              style={{ color: "var(--primary)", borderColor: "var(--primary)" }}
               onClick={handleAddIngredient}
               variant="outlined"
               size="small"
@@ -126,7 +132,19 @@ const IngredientsForm = ({ initialData, recipeId }) => {
             onClick={handleSave}
             variant="contained"
             size="small"
-            style={{ marginTop: "10px" }}
+            style={{
+              marginTop: "10px",
+              background: "var(--primary)",
+              color: "var(--inverse)",
+              fontFamily: "var(--font-family)",
+              fontWeight: "bold",
+              borderRadius: "8%",
+              textTransform: "None",
+              "&:hover": {
+                background: "var(--primary)",
+                color: "var(--inverse)",
+              },
+            }}
           >
             Save
           </Button>

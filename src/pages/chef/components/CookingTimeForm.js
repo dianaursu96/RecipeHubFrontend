@@ -80,10 +80,15 @@ const CookingTimeForm = ({ initialData, recipeId }) => {
           justifyContent: "space-between",
           alignItems: "center",
           fontWeight: "bold",
+          fontSize: "small",
         }}
       >
-        <span>Cooking Time</span>
-        <Button onClick={() => setIsEditing(!isEditing)} variant="text">
+        <span>Edit cooking time:</span>
+        <Button
+          onClick={() => setIsEditing(!isEditing)}
+          style={{ color: "var(--primary)", borderColor: "var(--primary)" }}
+          variant="text"
+        >
           {isEditing ? "Cancel" : "Edit"}
           <Pencil
             style={{ width: "16px", height: "16px", marginLeft: "5px" }}
@@ -96,12 +101,28 @@ const CookingTimeForm = ({ initialData, recipeId }) => {
             onChange={onChange}
             initialDuration={initialDuration}
           />
-          <Button type="submit" variant="contained" size="small">
+          <Button
+            type="submit"
+            variant="contained"
+            style={{
+              marginTop: "10px",
+              background: "var(--primary)",
+              color: "var(--inverse)",
+              fontFamily: "var(--font-family)",
+              fontWeight: "bold",
+              borderRadius: "8%",
+              textTransform: "None",
+              "&:hover": {
+                background: "var(--primary)",
+                color: "var(--inverse)",
+              },
+            }}
+            size="small"
+          >
             Save
           </Button>
         </form>
       ) : (
-        // <p>{initialData.cookingTime}</p>
         <p>{`${initialDuration.hours}h ${initialDuration.minutes}min`}</p>
       )}
     </div>

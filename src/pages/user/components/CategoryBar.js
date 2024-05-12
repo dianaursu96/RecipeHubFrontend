@@ -59,7 +59,7 @@ const CategoryBar = () => {
   };
 
   return (
-    <div className="category-bar">
+    <div className="categoryBar">
       <Stack direction="row" spacing={2.5} sx={{ marginLeft: 5 }}>
         {categories.map((category, index) => (
           <Chip

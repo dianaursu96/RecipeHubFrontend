@@ -1,3 +1,10 @@
-.rdp-picker>div:nth-child(3) {
-    display: none;
+.rdp-picker > div:nth-child(3) {
+  display: none;
+}
+
+p {
+  font-size: larger;
+}
+li {
+  font-size: larger;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Button, Modal } from "@mui/material";
-import { Trash } from "lucide-react";
+import { Trash, BookCheck, BookX } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../../redux/store/chef-slice";
@@ -71,8 +71,23 @@ const Actions = ({ disabled, recipeId, isPublished }) => {
       <Button
         onClick={handlePublish}
         disabled={disabled || isLoading}
-        variant="outlined"
-        size="small"
+        variant="contained"
+        startIcon={isPublished ? <BookX /> : <BookCheck />}
+        style={{
+          background: "var(--inverse)",
+          float: "right",
+          padding: "1em",
+          margin: "1.3em",
+          color: "var(--primary)",
+          fontFamily: "var(--font-family)",
+          fontWeight: "bold",
+          borderRadius: "7%",
+          textTransform: "None",
+          "&:hover": {
+            background: "var(--primary)",
+            color: "var(--inverse)",
+          },
+        }}
       >
         {isPublished ? "Unpublish" : "Publish"}
       </Button>
@@ -81,7 +96,9 @@ const Actions = ({ disabled, recipeId, isPublished }) => {
         size="small"
         disabled={isLoading}
       >
-        <Trash style={{ width: "20px", height: "20px" }} />
+        <Trash
+          style={{ color: "var(--primary)", width: "20px", height: "20px" }}
+        />
       </Button>
       <Modal
         open={openModal}

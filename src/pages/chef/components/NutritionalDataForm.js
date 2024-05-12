@@ -13,17 +13,17 @@ const NutritionalDataForm = ({ initialData, recipeId }) => {
   const [values, setValues] = useState(
     initialData.calories !== 0
       ? [
-          ((initialData.proteins * 4) / initialData.calories) * 100,
-          ((initialData.proteins + initialData.carbs * 4) /
+          ((initialData.protein * 4) / initialData.calories) * 100,
+          ((initialData.protein + initialData.carb * 4) /
             initialData.calories) *
             100,
         ]
       : [33.33, 66.67]
   ); // initial percentages for fats, carbs, and proteins
   const [calories, setCalories] = useState(initialData.calories ?? 0);
-  const [proteins, setProteins] = useState(initialData.proteins ?? 0);
-  const [carbs, setCarbs] = useState(initialData.carbs ?? 0);
-  const [fats, setFats] = useState(initialData.fats ?? 0);
+  const [proteins, setProteins] = useState(initialData.protein ?? 0);
+  const [carbs, setCarbs] = useState(initialData.carb ?? 0);
+  const [fats, setFats] = useState(initialData.fat ?? 0);
   const [isEditing, setIsEditing] = useState(false);
   const { register, handleSubmit } = useForm({
     defaultValues: { calories: initialData.calories },
@@ -87,10 +87,15 @@ const NutritionalDataForm = ({ initialData, recipeId }) => {
           justifyContent: "space-between",
           alignItems: "center",
           fontWeight: "bold",
+          fontSize: "small",
         }}
       >
-        <span>Nutritional facts / 100g</span>
-        <Button onClick={() => setIsEditing(!isEditing)} variant="text">
+        <span>Edit nutritional facts:</span>
+        <Button
+          onClick={() => setIsEditing(!isEditing)}
+          style={{ color: "var(--primary)", borderColor: "var(--primary)" }}
+          variant="text"
+        >
           {isEditing ? "Cancel" : "Edit"}
           <Pencil
             style={{ width: "16px", height: "16px", marginLeft: "5px" }}
@@ -151,7 +156,23 @@ const NutritionalDataForm = ({ initialData, recipeId }) => {
               </Typography>
             </Box>
           </Box>
-          <Button type="submit" variant="contained" size="small">
+          <Button
+            type="submit"
+            variant="contained"
+            style={{
+              background: "var(--primary)",
+              color: "var(--inverse)",
+              fontFamily: "var(--font-family)",
+              fontWeight: "bold",
+              borderRadius: "8%",
+              textTransform: "None",
+              "&:hover": {
+                background: "var(--primary)",
+                color: "var(--inverse)",
+              },
+            }}
+            size="small"
+          >
             Save
           </Button>
         </form>

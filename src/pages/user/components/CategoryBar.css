@@ -1,12 +1,8 @@
-/* .category-bar {
-  
-} */
-
 .MuiChip-root {
   color: #d94e78 !important;
   border: 2px solid #d94e78 !important;
   padding: 14px !important;
-  font-size: large !important;
+  font-size: medium !important;
   font-weight: 600 !important;
 }
 
