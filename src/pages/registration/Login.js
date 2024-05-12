@@ -31,6 +31,7 @@ const Login = () => {
               token: res.data.token,
               email: res.data.email,
               firstName: res.data.firstName,
+              lastName: res.data.lastName,
               role: res.data.role,
               favourites: res.data.favourites,
             })

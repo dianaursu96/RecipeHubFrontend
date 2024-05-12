@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../../UI/components/Spinner";
 // Modal components
-import { FormControl, InputLabel, Input, Modal } from "@mui/material";
+import { FormControl, InputLabel, Input, Modal, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../redux/store/chef-slice";
 
@@ -114,6 +114,19 @@ const RecipesTable = () => {
 
   return (
     <div>
+      <Box
+        style={{
+          color: "var(--secondary)",
+          float: "left",
+          padding: "1em",
+          margin: "2em",
+          fontWeight: "bold",
+          borderRadius: "var(--border-radius)",
+          textTransform: "None",
+        }}
+      >
+        <h1>My Recipes</h1>
+      </Box>
       <Button
         variant="contained"
         startIcon={<FaPlus />}
@@ -125,7 +138,7 @@ const RecipesTable = () => {
           color: "var(--primary)",
           fontFamily: "var(--font-family)",
           fontWeight: "bold",
-          borderRadius: "var(--border-radius)",
+          borderRadius: "5%",
           textTransform: "None",
           "&:hover": {
             background: "var(--primary)",

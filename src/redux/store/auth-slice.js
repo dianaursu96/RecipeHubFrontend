@@ -17,6 +17,7 @@ const authSlice = createSlice({
       state.id = action.payload.id;
       state.token = action.payload.token;
       state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
       state.email = action.payload.email;
       state.role = action.payload.role;
       state.favourites = action.payload.favourites;

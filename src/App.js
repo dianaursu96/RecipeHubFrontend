@@ -10,19 +10,13 @@ import AdminHomePage from "./pages/admin/Home";
 import RecipeCreatePage from "./pages/chef/RecipeCreatePage";
 import RecipeDetail from "./pages/user/RecipeDetail";
 import RecipeDetailChef from "./pages/chef/RecipeDetail";
+import Profile from "./UI/components/ProfilePage";
 import Favorites from "./pages/user/Favorites";
 import Layout from "./UI/components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./redux/store/auth-slice";
 import { readerActions } from "./redux/store/reader-slice";
-import {
-  FaHome,
-  FaUtensils,
-  FaHeart,
-  FaBookOpen,
-  FaQuestionCircle,
-  FaBook,
-} from "react-icons/fa";
+import { FaHome, FaHeart, FaBook } from "react-icons/fa";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -84,6 +78,14 @@ function App() {
           </Layout>
         }
       />
+      <Route
+        path="/profile"
+        element={
+          <Layout menuItems={menuItemsReader}>
+            <Profile />
+          </Layout>
+        }
+      />
     </>
   );
 
@@ -97,7 +99,14 @@ function App() {
           </Layout>
         }
       />
-      {/* <Route path="/users" element={<Layout><Users /></Layout>} /> */}
+      <Route
+        path="/profile"
+        element={
+          <Layout menuItems={menuItemsAdmin}>
+            <Profile />
+          </Layout>
+        }
+      />
     </>
   );
 
@@ -132,6 +141,14 @@ function App() {
         element={
           <Layout menuItems={menuItemsChef}>
             <RecipeDetailChef />
+          </Layout>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <Layout menuItems={menuItemsChef}>
+            <Profile />
           </Layout>
         }
       />

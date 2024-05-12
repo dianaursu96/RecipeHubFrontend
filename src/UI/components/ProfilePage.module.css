@@ -1,0 +1,141 @@
+.profile__container {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.profile__container h1 {
+  display: flex;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--secondary);
+}
+.profile__container span {
+  color: var(--secondary);
+}
+.profile__form-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2em 0;
+  width: 85vw;
+  text-align: left;
+}
+.profile__form-controls,
+.profile__invalid {
+  margin-bottom: 1.65em;
+  font-size: 0.8rem;
+}
+.profile__form-controls label {
+  color: var(--secondary);
+}
+.profile__invalid label {
+  color: red;
+}
+
+.profile__form-controls label > span {
+  color: var(--error);
+}
+.profile__invalid label > span {
+  color: red;
+}
+.profile__form-controls input,
+.profile__invalid input {
+  width: 100%;
+  padding: 1.2em;
+  display: inline-block;
+  border: none;
+}
+.profile__form-controls input {
+  background-color: var(--inverse);
+  color: var(--secondary);
+}
+.profile__invalid input {
+  background-color: var(--error);
+  color: var(--secondary);
+  border: 1px solid red;
+}
+
+.profile__invalid input:focus {
+  outline: none;
+}
+.profile__form-controls input:focus {
+  outline: solid 1px var(--primary);
+}
+.profile__invalid p {
+  color: red;
+}
+
+.profile__cta {
+  margin-top: 1.2em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.profile__cta button {
+  text-decoration: none;
+  margin: 0 auto;
+  padding: 1em 0.4em;
+  font-family: inherit;
+  width: 150px;
+  margin: 1em;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--secondary);
+  color: #fff;
+}
+.profile__cta a:hover,
+.profile__cta button:hover {
+  opacity: 0.4;
+}
+
+.profile__cta a:last-of-type {
+  color: var(--primary);
+}
+.profile__cta a:last-of-type {
+  font-size: 0.8rem;
+}
+
+/* tablet */
+@media screen and (min-width: 510px) and (max-width: 1023px) {
+  .profile__container h1 {
+    font-size: 3.6rem;
+    margin-bottom: 0.6em;
+  }
+
+  .profile__cta button {
+    width: 250px;
+    font-size: 1.4rem;
+  }
+  .profile__cta a:last-of-type {
+    font-size: 0.8rem;
+  }
+}
+
+/* laptop */
+@media screen and (min-width: 1024px) {
+  .profile__container h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5em;
+    margin-bottom: 0.2em;
+  }
+
+  .profile__cta button {
+    padding: 1em 0.4em;
+    width: 350px;
+    font-size: 1.4rem;
+  }
+  .profile__form-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+    width: 65vw;
+    text-align: left;
+  }
+}
