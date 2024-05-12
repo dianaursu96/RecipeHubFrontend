@@ -2,26 +2,11 @@ import React, { useState } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 // import Footer from './Footer';
-import {
-  FaBars,
-  FaAngleLeft,
-  FaHome,
-  FaUtensils,
-  FaHeart,
-  FaBookOpen,
-  FaQuestionCircle,
-} from "react-icons/fa";
+import { FaBars, FaAngleLeft } from "react-icons/fa";
 import { IconButton, Divider } from "@mui/material";
 import classes from "./Layout.module.css";
 
-function Layout({ children }) {
-  const menuItems = [
-    { label: "Home", path: "/", icon: <FaHome /> },
-    { label: "Recipes", path: "/recipes", icon: <FaUtensils /> },
-    { label: "Favourites", path: "/favorites", icon: <FaHeart /> },
-    { label: "References", path: "/references", icon: <FaBookOpen /> },
-    { label: "FAQ", path: "/faq", icon: <FaQuestionCircle /> },
-  ];
+function Layout({ children, menuItems }) {
   const [openDrawer, setOpenDrawer] = useState(false); // State for drawer open/close
 
   const toggleDrawer = () => {

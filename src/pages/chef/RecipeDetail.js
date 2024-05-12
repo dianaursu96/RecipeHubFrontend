@@ -35,7 +35,7 @@ const RecipeDetail = () => {
     setIsLoading(true);
     axios({
       method: "GET",
-      url: `http://localhost:8081/reader/recipes/${id}`,
+      url: `http://localhost:8081/chef/recipes/${id}`,
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -94,55 +94,6 @@ const RecipeDetail = () => {
     </li>
   ));
 
-  const favouriteHandler = () => {
-    axios({
-      method: favorited ? "DELETE" : "POST",
-      url: `http://localhost:8081/reader/favourites/${
-        favorited ? "delete" : "add"
-      }?recipeId=${id}`,
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          setIsFavorited(!favorited);
-          dispatch(readerActions.initializeFavourites(res.data));
-          let userObject = JSON.parse(localStorage.getItem("userData"));
-          userObject.favourites = res.data;
-          // Store the updated user data back in localStorage
-          localStorage.setItem("userData", JSON.stringify(userObject));
-        } else {
-          alert(res.error.message);
-        }
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  };
-
-  // SHOWING BUTTON DEPENDING ON THE ISFAVORITE STATE
-  const favoriteButton = favorited ? (
-    <button
-      onClick={favouriteHandler}
-      style={{
-        background: "var(--primary)",
-        color: "var(--inverse)",
-      }}
-    >
-      <span>
-        <FaHeart />
-        Remove from Favourites
-      </span>
-    </button>
-  ) : (
-    <button onClick={favouriteHandler}>
-      <span>
-        <FaHeart />
-        Add to Favourites
-      </span>
-    </button>
-  );
   return (
     <Fragment>
       {isLoading && <Spinner />}
@@ -157,11 +108,6 @@ const RecipeDetail = () => {
             </div>
             <div className={classes["recipe-details"]}>
               <h1>{recipe.title}</h1>
-              <i>
-                {recipe.chef?.firstName && recipe.chef?.lastName
-                  ? `by Chef ${recipe.chef?.firstName} ${recipe.chef?.lastName}`
-                  : "by Anonymous"}
-              </i>
               <div className={classes["recipe-tag__calorie-time"]}>
                 <div>
                   <span>
@@ -202,7 +148,6 @@ const RecipeDetail = () => {
             </div>
 
             <div className={classes["favorites-button-group"]}>
-              {favoriteButton}
               <button onClick={() => navigate(-1)}>
                 <span>
                   <FaArrowLeft />

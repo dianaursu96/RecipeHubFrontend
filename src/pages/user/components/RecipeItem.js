@@ -15,6 +15,7 @@ const RecipeItem = ({
   cookingTime,
   tags,
   imageURL,
+  chef,
 }) => {
   const token = useSelector((state) => state.auth.token);
 
@@ -96,6 +97,11 @@ const RecipeItem = ({
       <div className="recipe-card-body">
         <div className="recipe-title">
           <h1>{name}</h1>
+          <i>
+            {chef?.firstName && chef?.lastName
+              ? `by Chef ${chef?.firstName} ${chef?.lastName}`
+              : "by Anonymous"}
+          </i>
         </div>
         <div className="recipe-details">
           <div className="recipe-tag__calorie-time">

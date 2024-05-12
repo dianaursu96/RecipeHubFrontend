@@ -5,14 +5,24 @@ import Login from "./pages/registration/Login";
 import SignUp from "./pages/registration/SignUp";
 import UserHomePage from "./pages/user/Home";
 import ChefHomePage from "./pages/chef/Home";
+import ChefCreationCenter from "./pages/chef/CreationCenter";
 import AdminHomePage from "./pages/admin/Home";
 import RecipeCreatePage from "./pages/chef/RecipeCreatePage";
 import RecipeDetail from "./pages/user/RecipeDetail";
+import RecipeDetailChef from "./pages/chef/RecipeDetail";
 import Favorites from "./pages/user/Favorites";
 import Layout from "./UI/components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./redux/store/auth-slice";
 import { readerActions } from "./redux/store/reader-slice";
+import {
+  FaHome,
+  FaUtensils,
+  FaHeart,
+  FaBookOpen,
+  FaQuestionCircle,
+  FaBook,
+} from "react-icons/fa";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -34,12 +44,26 @@ function App() {
     }
   }, []);
 
+  const menuItemsReader = [
+    { label: "Home", path: "/", icon: <FaHome /> },
+    // { label: "Recipes", path: "/recipes", icon: <FaUtensils /> },
+    { label: "Favourites", path: "/favorites", icon: <FaHeart /> },
+    // { label: "References", path: "/references", icon: <FaBookOpen /> },
+    // { label: "FAQ", path: "/faq", icon: <FaQuestionCircle /> },
+  ];
+  const menuItemsAdmin = [{ label: "Home", path: "/", icon: <FaHome /> }];
+
+  const menuItemsChef = [
+    { label: "Home", path: "/", icon: <FaHome /> },
+    { label: "Creation Center", path: "/creation", icon: <FaBook /> },
+  ];
+
   const readerRoutes = (
     <>
       <Route
         path="/"
         element={
-          <Layout>
+          <Layout menuItems={menuItemsReader}>
             <UserHomePage />
           </Layout>
         }
@@ -47,7 +71,7 @@ function App() {
       <Route
         path="/favorites"
         element={
-          <Layout>
+          <Layout menuItems={menuItemsReader}>
             <Favorites />
           </Layout>
         }
@@ -55,7 +79,7 @@ function App() {
       <Route
         path="/recipe/details/:id/*"
         element={
-          <Layout>
+          <Layout menuItems={menuItemsReader}>
             <RecipeDetail />
           </Layout>
         }
@@ -68,7 +92,7 @@ function App() {
       <Route
         path="/"
         element={
-          <Layout>
+          <Layout menuItems={menuItemsAdmin}>
             <AdminHomePage />
           </Layout>
         }
@@ -82,7 +106,7 @@ function App() {
       <Route
         path="/"
         element={
-          <Layout>
+          <Layout menuItems={menuItemsChef}>
             <ChefHomePage />
           </Layout>
         }
@@ -90,16 +114,24 @@ function App() {
       <Route
         path="/recipes/:id"
         element={
-          <Layout>
+          <Layout menuItems={menuItemsChef}>
             <RecipeCreatePage />
           </Layout>
         }
       />
       <Route
-        path="/create"
+        path="/creation"
         element={
-          <Layout>
-            <RecipeCreatePage />
+          <Layout menuItems={menuItemsChef}>
+            <ChefCreationCenter />
+          </Layout>
+        }
+      />
+      <Route
+        path="/recipe/details/:id/*"
+        element={
+          <Layout menuItems={menuItemsChef}>
+            <RecipeDetailChef />
           </Layout>
         }
       />
