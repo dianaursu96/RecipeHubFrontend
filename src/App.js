@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./redux/store/auth-slice";
 import { readerActions } from "./redux/store/reader-slice";
 import { FaHome, FaHeart, FaBook } from "react-icons/fa";
+import AlertPopup from "./UI/components/AlertPopup";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -31,6 +32,8 @@ function App() {
           id: storedData.uid,
           token: storedData.token,
           firstName: storedData.firstName,
+          lastName: storedData.lastName,
+          email: storedData.email,
           role: storedData.role,
         })
       );
@@ -156,28 +159,32 @@ function App() {
   );
 
   return (
-    <Routes>
-      {!token && (
-        <>
-          <Route
-            path="*"
-            element={
-              <h1>
-                Unauthorized Access.{" "}
-                <Link to="/login">Click here to login your account</Link>
-              </h1>
-            }
-          />
-          <Route path="/" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-        </>
-      )}
+    <>
+      <AlertPopup />
 
-      {token && role === "READER" && readerRoutes}
-      {token && role === "ADMIN" && adminRoutes}
-      {token && role === "CHEF" && chefRoutes}
-    </Routes>
+      <Routes>
+        {!token && (
+          <>
+            <Route
+              path="*"
+              element={
+                <h1>
+                  Unauthorized Access.{" "}
+                  <Link to="/login">Click here to login your account</Link>
+                </h1>
+              }
+            />
+            <Route path="/" element={<Registration />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+          </>
+        )}
+
+        {token && role === "READER" && readerRoutes}
+        {token && role === "ADMIN" && adminRoutes}
+        {token && role === "CHEF" && chefRoutes}
+      </Routes>
+    </>
   );
 }
 

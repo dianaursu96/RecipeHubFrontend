@@ -7,7 +7,7 @@ import { IconButton, Divider } from "@mui/material";
 import classes from "./Layout.module.css";
 
 function Layout({ children, menuItems }) {
-  const [openDrawer, setOpenDrawer] = useState(false); // State for drawer open/close
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const toggleDrawer = () => {
     setOpenDrawer(!openDrawer);

@@ -17,37 +17,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../redux/store/chef-slice";
 import IngredientsForm from "./components/IngredientsForm";
 import TagsForm from "./components/TagsForm";
+import { alertActions } from "../../redux/store/alert-slice";
+import AlertPopup from "../../UI/components/AlertPopup";
 
 const RecipeCreatePage = ({}) => {
   // const recipes = useSelector((state) => state.chef.recipes);
   const recipe = useSelector((state) => state.chef.currentDraft);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  // const [recipe, setRecipe] = useState(null);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const { id: recipeId } = useParams();
-  // useEffect(() => {
-  //     const fetchData = async () => {
-  //         try {
-  //             const { data: courseData } = await axios.get(`/api/courses/${recipeId}`);
-  //             const { data: categoriesData } = await axios.get(`/api/categories`);
 
-  //             setRecipe(courseData);
-  //             setCategories(categoriesData);
-  //             setLoading(false);
-  //         } catch (error) {
-  //             console.error("Error fetching recipe data:", error);
-  //         }
-  //     };
-
-  //     fetchData();
-  // }, [recipeId]);
   useEffect(() => {
-    // if (recipes?.length) {
-    //   setRecipe(recipes?.find((recipe) => recipe.id === recipeId));
-    //   return;
-    // }
     setIsLoading(true);
     axios({
       method: "GET",
@@ -61,14 +42,13 @@ const RecipeCreatePage = ({}) => {
           dispatch(chefActions.initializeDraft(res.data));
           // setRecipe(currentDraft);
         } else {
-          alert(res.error.message);
+          dispatch(alertActions.setErrorMessage(res.error.message));
         }
         setIsLoading(false);
       })
       .catch((err) => {
-        alert(err.message);
+        dispatch(alertActions.setErrorMessage(err.message));
         setIsLoading(false);
-        setError(err);
       });
   }, [dispatch]);
 
@@ -96,6 +76,7 @@ const RecipeCreatePage = ({}) => {
 
   return (
     <>
+      {/* <AlertPopup /> */}
       {!recipe.isPublished && (
         <Banner label="This recipe is unpublished. It will not be visible to the public." />
       )}

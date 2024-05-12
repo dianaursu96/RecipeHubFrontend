@@ -4,15 +4,17 @@ import { readerActions } from "../../redux/store/reader-slice";
 import MainContent from "./components/MainContent";
 import Spinner from "../../UI/components/Spinner";
 import axios from "axios";
+import { alertActions } from "../../redux/store/alert-slice";
+import AlertPopup from "../../UI/components/AlertPopup";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const token = useSelector((state) => state.auth.token);
+  const error = useSelector((state) => state.alert.hasError);
 
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,14 +29,13 @@ const Home = () => {
         if (res.status === 200) {
           setRecipes(res.data.filter((recipe) => recipe.isPublished));
         } else {
-          alert(res.error.message);
+          dispatch(alertActions.setErrorMessage(res.error.message));
         }
         setIsLoading(false);
       })
       .catch((err) => {
-        alert(err.message);
+        dispatch(alertActions.setErrorMessage(err.message));
         setIsLoading(false);
-        setError(err);
       });
   }, []);
 
@@ -51,6 +52,7 @@ const Home = () => {
 
   return (
     <>
+      {/* <AlertPopup /> */}
       <div className="banner-container" id="recipes">
         <div className="banner-title">{banner}</div>
       </div>

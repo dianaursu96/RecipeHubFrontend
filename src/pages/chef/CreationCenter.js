@@ -19,6 +19,8 @@ import Spinner from "../../UI/components/Spinner";
 import { FormControl, InputLabel, Input, Modal, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../redux/store/chef-slice";
+import AlertPopup from "../../UI/components/AlertPopup";
+import { alertActions } from "../../redux/store/alert-slice";
 
 const options = [
   {
@@ -45,6 +47,7 @@ const options = [
 
 const RecipesTable = () => {
   const rows = useSelector((state) => state.chef.drafts);
+  const error = useSelector((state) => state.alert.hasError);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newRecipeTitle, setNewRecipeTitle] = useState("");
   const [newRecipeCategory, setNewRecipeCategory] = useState("");
@@ -52,7 +55,6 @@ const RecipesTable = () => {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -67,14 +69,13 @@ const RecipesTable = () => {
         if (res.status === 200) {
           dispatch(chefActions.initializeRecipes(res.data));
         } else {
-          alert(res.error.message);
+          dispatch(alertActions.setErrorMessage(res.error.message));
         }
         setIsLoading(false);
       })
       .catch((err) => {
-        alert(err.message);
+        dispatch(alertActions.setErrorMessage(err.message));
         setIsLoading(false);
-        setError(err);
       });
   }, [dispatch]);
 
@@ -101,19 +102,24 @@ const RecipesTable = () => {
     })
       .then((res) => {
         if (res.status === 200) {
+          dispatch(alertActions.setSuccessMessage("Operation successful!"));
+          dispatch(
+            alertActions.setSuccessMessage("Recipe created successfully!")
+          );
           dispatch(chefActions.addNewDraft(res.data));
         } else {
-          alert(res.error.message);
+          dispatch(alertActions.setErrorMessage(res.error.message));
         }
       })
       .catch((err) => {
-        alert(err.message);
+        dispatch(alertActions.setErrorMessage(err.message));
       });
     setIsModalOpen(false);
   };
 
   return (
     <div>
+      {/* <AlertPopup /> */}
       <Box
         style={{
           color: "var(--secondary)",
@@ -150,11 +156,6 @@ const RecipesTable = () => {
         Add New Recipe
       </Button>
       {isLoading && <Spinner />}
-      {error && (
-        <main id="main-content" className="main-content-container">
-          <h1>Error: {error.message}</h1>
-        </main>
-      )}
       {!isLoading && !error && (
         <TableContainer component={Paper} style={{ padding: "2em" }}>
           <Table style={{ minWidth: 650 }} aria-label="recipes table">

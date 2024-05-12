@@ -6,6 +6,8 @@ import axios from "axios";
 import { chefActions } from "../../../redux/store/chef-slice";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import { alertActions } from "../../../redux/store/alert-slice";
+import AlertPopup from "../../../UI/components/AlertPopup";
 
 const TagsForm = ({ initialData, recipeId }) => {
   const token = useSelector((state) => state.auth.token);
@@ -52,13 +54,14 @@ const TagsForm = ({ initialData, recipeId }) => {
       })
         .then((res) => {
           if (res.status === 200) {
+            dispatch(alertActions.setSuccessMessage("Operation successful!"));
             dispatch(chefActions.initializeDraft(res.data));
           } else {
-            alert(res.error.message);
+            dispatch(alertActions.setErrorMessage(res.error.message));
           }
         })
         .catch((err) => {
-          alert(err.message);
+          dispatch(alertActions.setErrorMessage(err.message));
         });
       setIsEditing(false);
     } catch (error) {
@@ -76,6 +79,7 @@ const TagsForm = ({ initialData, recipeId }) => {
         marginTop: "10px",
       }}
     >
+      {/* <AlertPopup /> */}
       <div
         style={{
           display: "flex",

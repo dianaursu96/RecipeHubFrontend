@@ -3,9 +3,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../UI/components/Logo";
 import classes from "./SignUp.module.css";
+import { alertActions } from "../../redux/store/alert-slice";
+import { useDispatch } from "react-redux";
+import AlertPopup from "../../UI/components/AlertPopup";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const initialFormData = {
     firstName: "",
@@ -63,16 +67,18 @@ const SignUp = () => {
         );
 
         if (res.status === 200) {
-          alert("Account created successfully!");
+          dispatch(
+            alertActions.setSuccessMessage("Account created successfully!")
+          );
           navigate("/login");
         } else {
-          alert("Something went wrong.");
+          dispatch(alertActions.setErrorMessage("Something went wrong."));
         }
       } catch (error) {
         if (error?.response?.data) {
-          alert(error?.response?.data);
+          dispatch(alertActions.setErrorMessage(error?.response?.data));
         } else {
-          alert(error.message);
+          dispatch(alertActions.setErrorMessage(error.message));
         }
       }
     }
@@ -80,6 +86,7 @@ const SignUp = () => {
 
   return (
     <div className={classes.signup__container}>
+      {/* <AlertPopup /> */}
       <Logo />
       <form
         onSubmit={handleSubmit}

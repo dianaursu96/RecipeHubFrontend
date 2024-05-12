@@ -6,6 +6,8 @@ import Card from "./Card";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { readerActions } from "../../../redux/store/reader-slice";
+import { alertActions } from "../../../redux/store/alert-slice";
+import AlertPopup from "../../../UI/components/AlertPopup";
 
 const RecipeItem = ({
   id,
@@ -41,6 +43,7 @@ const RecipeItem = ({
     })
       .then((res) => {
         if (res.status === 200) {
+          dispatch(alertActions.setSuccessMessage("Operation successful!"));
           setFavorited(!favorited);
           dispatch(readerActions.initializeFavourites(res.data));
           let userObject = JSON.parse(localStorage.getItem("userData"));
@@ -48,16 +51,17 @@ const RecipeItem = ({
           // Store the updated user data back in localStorage
           localStorage.setItem("userData", JSON.stringify(userObject));
         } else {
-          alert(res.error.message);
+          dispatch(alertActions.setErrorMessage(res.error.message));
         }
       })
       .catch((err) => {
-        alert(err.message);
+        dispatch(alertActions.setErrorMessage(err.message));
       });
   };
 
   return (
     <Card className="recipe-item-container">
+      {/* <AlertPopup /> */}
       <div className="recipe-card-header">
         <div>
           <Link

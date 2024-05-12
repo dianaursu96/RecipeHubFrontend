@@ -10,21 +10,20 @@ import axios from "axios";
 import Spinner from "../../UI/components/Spinner";
 import { MdLocalFireDepartment } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { readerActions } from "../../redux/store/reader-slice";
+import { alertActions } from "../../redux/store/alert-slice";
+import AlertPopup from "../../UI/components/AlertPopup";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state) => state.reader.recipes);
-  const favourites = useSelector((state) => state.reader.favourites);
+  const error = useSelector((state) => state.alert.hasError);
   const [recipe, setRecipe] = useState({});
   const token = useSelector((state) => state.auth.token);
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const id = location.state.id;
-  const [favorited, setIsFavorited] = useState(favourites.includes(id));
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   // Fetch recipe details
 
   useEffect(() => {
@@ -44,14 +43,13 @@ const RecipeDetail = () => {
         if (res.status === 200) {
           setRecipe(res.data);
         } else {
-          alert(res.error.message);
+          dispatch(alertActions.setErrorMessage(res.error.message));
         }
         setIsLoading(false);
       })
       .catch((err) => {
-        alert(err.message);
+        dispatch(alertActions.setErrorMessage(err.message));
         setIsLoading(false);
-        setError(err);
       });
   }, []);
 
@@ -96,6 +94,7 @@ const RecipeDetail = () => {
 
   return (
     <Fragment>
+      {/* <AlertPopup /> */}
       {isLoading && <Spinner />}
       <main id="main-content" className="main-content-container">
         {error && <h1>Error: {error.message}</h1>}

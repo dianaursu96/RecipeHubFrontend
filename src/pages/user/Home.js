@@ -6,17 +6,19 @@ import Spinner from "../../UI/components/Spinner";
 import SearchRecipe from "./components/SearchRecipe";
 import axios from "axios";
 import CategoryBar from "./components/CategoryBar";
+import AlertPopup from "../../UI/components/AlertPopup";
+import { alertActions } from "../../redux/store/alert-slice";
 
 const Home = () => {
   const recipes = useSelector((state) => state.reader.recipes);
   const searchInput = useSelector((state) => state.reader.searchInput);
   const currentCategory = useSelector((state) => state.reader.currentCategory);
   const token = useSelector((state) => state.auth.token);
-
-  const dispatch = useDispatch();
+  const error = useSelector((state) => state.alert.hasError);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(true);
@@ -35,14 +37,13 @@ const Home = () => {
             })
           );
         } else {
-          alert(res.error.message);
+          dispatch(alertActions.setErrorMessage(res.error.message));
         }
         setIsLoading(false);
       })
       .catch((err) => {
-        alert(err.message);
         setIsLoading(false);
-        setError(err);
+        dispatch(alertActions.setErrorMessage(err.message));
       });
   }, [searchInput, currentCategory]);
 
@@ -62,16 +63,12 @@ const Home = () => {
 
   return (
     <>
+      {/* <AlertPopup /> */}
       <div className="banner-container" id="recipes">
         <div className="banner-title">{banner}</div>
         <SearchRecipe className="search__container" />
       </div>
       {isLoading && <Spinner />}
-      {error && (
-        <main id="main-content" className="main-content-container">
-          <h1>Error: {error.message}</h1>
-        </main>
-      )}
       {!isLoading && !error && (
         <>
           <CategoryBar />

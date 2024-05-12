@@ -7,15 +7,17 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../redux/store/auth-slice";
 import { readerActions } from "../../redux/store/reader-slice";
+import AlertPopup from "../../UI/components/AlertPopup";
+import { alertActions } from "../../redux/store/alert-slice";
 
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const [errorMessage, setErrorMessage] = useState("");
   const onLoginHandler = (e) => {
     e.preventDefault();
-
     axios
       .post(`http://localhost:8081/login`, {
         email: emailRef.current.value,
@@ -23,7 +25,7 @@ const Login = () => {
       })
       .then((res) => {
         if (res.status === 200) {
-          alert(res.data.message);
+          dispatch(alertActions.setSuccessMessage(res.data.message));
           localStorage.setItem(
             "userData",
             JSON.stringify({
@@ -31,7 +33,8 @@ const Login = () => {
               token: res.data.token,
               email: res.data.email,
               firstName: res.data.firstName,
-              lastName: res.data.lastName,
+              lastName: res.data.firstName,
+              // password: res.data.password,
               role: res.data.role,
               favourites: res.data.favourites,
             })
@@ -41,12 +44,17 @@ const Login = () => {
           navigate("/");
         }
       })
-      .catch((err) => {
-        alert(err.message);
+      .catch((error) => {
+        if (error?.response?.data) {
+          dispatch(alertActions.setErrorMessage(error?.response?.data));
+        } else {
+          dispatch(alertActions.setErrorMessage(error.message));
+        }
       });
   };
   return (
     <div className={classes.login__container}>
+      {/* <AlertPopup /> */}
       <Logo />
       <form
         onSubmit={onLoginHandler}

@@ -22,6 +22,8 @@ import { chefActions } from "../../redux/store/chef-slice";
 import { RotateCwSquare } from "lucide-react";
 import { MdOutlineModeEdit as EditIcon } from "react-icons/md";
 import { IoIosSave as SaveIcon } from "react-icons/io";
+import AlertPopup from "../../UI/components/AlertPopup";
+import { alertActions } from "../../redux/store/alert-slice";
 
 const roles = [
   {
@@ -39,13 +41,12 @@ const roles = [
 ];
 
 const RecipesTable = () => {
-  // const rows = useSelector((state) => state.chef.drafts);
+  const error = useSelector((state) => state.alert.hasError);
   const token = useSelector((state) => state.auth.token);
 
   const [rows, setRows] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [updatedRoles, setUpdatedRoles] = useState({});
 
   const dispatch = useDispatch();
@@ -79,16 +80,16 @@ const RecipesTable = () => {
     })
       .then((res) => {
         if (res.status === 200) {
+          dispatch(alertActions.setSuccessMessage("Operation successful!"));
           setIsEditing(!isEditing);
         } else {
-          alert(res.error.message);
+          dispatch(alertActions.setErrorMessage(res.error.message));
         }
         setIsLoading(false);
       })
       .catch((err) => {
-        alert(err.message);
+        dispatch(alertActions.setErrorMessage(err.message));
         setIsLoading(false);
-        setError(err);
       });
   };
 
@@ -105,19 +106,19 @@ const RecipesTable = () => {
         if (res.status === 200) {
           setRows(res.data);
         } else {
-          alert(res.error.message);
+          dispatch(alertActions.setErrorMessage(res.error.message));
         }
         setIsLoading(false);
       })
       .catch((err) => {
-        alert(err.message);
+        dispatch(alertActions.setErrorMessage(err.message));
         setIsLoading(false);
-        setError(err);
       });
   }, [dispatch, isEditing]);
 
   return (
     <div>
+      {/* <AlertPopup /> */}
       {isEditing ? (
         <Button
           variant="contained"
@@ -166,11 +167,6 @@ const RecipesTable = () => {
         </Button>
       )}
       {isLoading && <Spinner />}
-      {error && (
-        <main id="main-content" className="main-content-container">
-          <h1>Error: {error.message}</h1>
-        </main>
-      )}
       {!isLoading && !error && (
         <TableContainer component={Paper} style={{ padding: "2em" }}>
           <Table style={{ minWidth: 400 }} aria-label="recipes table">

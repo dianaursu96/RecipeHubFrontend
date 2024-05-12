@@ -4,6 +4,8 @@ import { TextField, Button, IconButton } from "@mui/material";
 import { Pencil, Trash } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../../redux/store/chef-slice";
+import { alertActions } from "../../../redux/store/alert-slice";
+import AlertPopup from "../../../UI/components/AlertPopup";
 
 const IngredientsForm = ({ initialData, recipeId }) => {
   const token = useSelector((state) => state.auth.token);
@@ -37,13 +39,14 @@ const IngredientsForm = ({ initialData, recipeId }) => {
       })
         .then((res) => {
           if (res.status === 200) {
+            dispatch(alertActions.setSuccessMessage("Operation successful!"));
             dispatch(chefActions.initializeDraft(res.data));
           } else {
-            alert(res.error.message);
+            dispatch(alertActions.setErrorMessage(res.error.message));
           }
         })
         .catch((err) => {
-          alert(err.message);
+          dispatch(alertActions.setErrorMessage(err.message));
         });
       setIsEditing(false);
     } catch (error) {
@@ -61,6 +64,7 @@ const IngredientsForm = ({ initialData, recipeId }) => {
         marginTop: "10px",
       }}
     >
+      {/* <AlertPopup /> */}
       <div
         style={{
           display: "flex",

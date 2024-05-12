@@ -2,10 +2,15 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./ProfilePage.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../../redux/store/auth-slice";
+import { alertActions } from "../../redux/store/alert-slice";
+import AlertPopup from "./AlertPopup";
 
 const ProfilePage = () => {
   const { firstName, lastName, email } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const initialFormData = {
     firstName: firstName,
@@ -58,16 +63,38 @@ const ProfilePage = () => {
           },
         });
         if (res.status === 200) {
-          alert("Profile updated successfully!");
-          // Redirect to a success page or refresh current page
+          dispatch(alertActions.setSuccessMessage("Operation successful!"));
+          dispatch(
+            alertActions.setSuccessMessage("Profile updated successfully!")
+          );
+          if (formData.email === email) {
+            let userObject = JSON.parse(localStorage.getItem("userData"));
+            userObject.firstName = formData.firstName;
+            userObject.lastName = formData.lastName;
+            userObject.email = formData.email;
+            localStorage.setItem("userData", JSON.stringify(userObject));
+            dispatch(
+              authActions.updateProfile({
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+              })
+            );
+
+            navigate("/");
+            // Redirect to a success page or refresh current page
+          } else {
+            dispatch(authActions.logout());
+            navigate("/login");
+          }
         } else {
-          alert("Something went wrong.");
+          dispatch(alertActions.setErrorMessage("Something went wrong."));
         }
       } catch (error) {
         if (error?.response?.data) {
-          alert(error?.response?.data);
+          dispatch(alertActions.setErrorMessage(error?.response?.data));
         } else {
-          alert(error.message);
+          dispatch(alertActions.setErrorMessage(error.message));
         }
       }
     }
@@ -75,6 +102,7 @@ const ProfilePage = () => {
 
   return (
     <div className={classes.profile__container}>
+      {/* <AlertPopup /> */}
       <h1>Edit your profile info</h1>
       <form
         onSubmit={handleSubmit}
@@ -124,6 +152,7 @@ const ProfilePage = () => {
             </label>
           </div>
         ))}
+        <h4>*Updating your email will redirect you to the login page</h4>
         <div className={classes.profile__cta}>
           <button type="submit">Update Profile</button>
           <Link to="/">Back to home</Link>

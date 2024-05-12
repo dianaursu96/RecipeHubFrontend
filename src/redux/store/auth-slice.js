@@ -6,6 +6,7 @@ const initialState = {
   firstName: "",
   lastName: "",
   email: "",
+  // password: "",
   role: "",
   favourites: [],
 };
@@ -13,12 +14,18 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    updateProfile(state, action) {
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
+      state.email = action.payload.email;
+    },
     login(state, action) {
       state.id = action.payload.id;
       state.token = action.payload.token;
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.email = action.payload.email;
+      // state.password = action.payload.password;
       state.role = action.payload.role;
       state.favourites = action.payload.favourites;
     },
