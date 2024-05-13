@@ -176,7 +176,7 @@
   align-items: center;
   gap: 8px;
   font-size: 1.3em;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
 }
 
 .recipe-nutritional-facts {
@@ -387,7 +387,7 @@ span {
     justify-content: flex-start;
   } */
 
-  .recipe-preparation span,
+  /* .recipe-preparation span, */
   .recipe-nutritional-facts span,
   .recipe-ingredients span {
     justify-content: flex-start;

@@ -27,10 +27,6 @@ const RecipeDetail = () => {
   // Fetch recipe details
 
   useEffect(() => {
-    if (recipes.length) {
-      setRecipe(recipes?.find((recipe) => recipe.id === id));
-      return;
-    }
     setIsLoading(true);
     axios({
       method: "GET",

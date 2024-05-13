@@ -108,7 +108,7 @@ const TagsForm = ({ initialData, recipeId }) => {
             {tags.map((tag, index) => (
               <Chip
                 key={index}
-                label={tag}
+                label={`#${tag}`}
                 onDelete={() => handleDeleteTag(index)}
                 style={{ margin: "5px" }}
               />
@@ -173,7 +173,7 @@ const TagsForm = ({ initialData, recipeId }) => {
       ) : (
         <Stack direction="row" spacing={1}>
           {tags.map((tag, index) => (
-            <Chip key={index} label={tag} style={{ margin: "5px" }} />
+            <Chip key={index} label={`#${tag}`} style={{ margin: "5px" }} />
           ))}
         </Stack>
       )}

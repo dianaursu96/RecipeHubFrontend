@@ -3,8 +3,13 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Button, MenuItem, Select } from "@mui/material";
 import { Pencil } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { chefActions } from "../../../redux/store/chef-slice";
+import { alertActions } from "../../../redux/store/alert-slice";
 
 const CategoryForm = ({ initialData, recipeId }) => {
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
   const options = [
     {
       label: "Main Dish",
@@ -34,11 +39,28 @@ const CategoryForm = ({ initialData, recipeId }) => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.patch(`/api/courses/${recipeId}`, data);
+      axios({
+        method: "PUT",
+        url: `http://localhost:8081/chef/recipes/update/${recipeId}`,
+        data: data,
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(alertActions.setSuccessMessage("Operation successful!"));
+            dispatch(chefActions.initializeDraft(res.data));
+          } else {
+            dispatch(alertActions.setErrorMessage(res.error.message));
+          }
+        })
+        .catch((err) => {
+          dispatch(alertActions.setErrorMessage(err.message));
+        });
       setIsEditing(false);
-      // router.refresh();
     } catch (error) {
-      console.error("Error updating category:", error);
+      console.error("Error updating title:", error);
     }
   };
 
