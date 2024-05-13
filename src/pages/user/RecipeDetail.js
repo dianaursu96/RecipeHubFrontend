@@ -1,12 +1,10 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { FaFireAlt, FaRegClock, FaHeart, FaArrowLeft } from "react-icons/fa";
-import { IoIosCheckbox } from "react-icons/io";
 import classes from "./RecipeDetail.module.css";
 import book from "../../assets/images/book.png";
 import ingredientImage from "../../assets/images/ingredients.png";
 import nutritionImage from "../../assets/images/nutirtion.png";
 import { CiCircleCheck } from "react-icons/ci";
-import { Check } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../../UI/components/Spinner";
@@ -124,7 +122,6 @@ const RecipeDetail = () => {
       });
   };
 
-  // SHOWING BUTTON DEPENDING ON THE ISFAVORITE STATE
   const favoriteButton = favorited ? (
     <button
       onClick={favouriteHandler}
@@ -148,7 +145,6 @@ const RecipeDetail = () => {
   );
   return (
     <Fragment>
-      {/* <AlertPopup /> */}
       {isLoading && <Spinner />}
       <main id="main-content" className="main-content-container">
         {error && <h1>Error: {error.message}</h1>}

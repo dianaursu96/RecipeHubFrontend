@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
-import { FaEdit, FaBook, FaPlus } from "react-icons/fa";
+import { FaEdit, FaPlus } from "react-icons/fa";
 import { FaUtensils } from "react-icons/fa6";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -20,7 +20,6 @@ import Spinner from "../../UI/components/Spinner";
 import { FormControl, InputLabel, Input, Modal, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../redux/store/chef-slice";
-import AlertPopup from "../../UI/components/AlertPopup";
 import { alertActions } from "../../redux/store/alert-slice";
 
 const options = [
@@ -120,7 +119,6 @@ const RecipesTable = () => {
 
   return (
     <div>
-      {/* <AlertPopup /> */}
       <Box
         style={{
           color: "var(--secondary)",

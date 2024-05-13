@@ -20,7 +20,6 @@ import {
   Route,
   Flame,
   Tag,
-  Salad,
   Utensils,
 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,10 +27,8 @@ import { chefActions } from "../../redux/store/chef-slice";
 import IngredientsForm from "./components/IngredientsForm";
 import TagsForm from "./components/TagsForm";
 import { alertActions } from "../../redux/store/alert-slice";
-import AlertPopup from "../../UI/components/AlertPopup";
 
 const RecipeCreatePage = ({}) => {
-  // const recipes = useSelector((state) => state.chef.recipes);
   const recipe = useSelector((state) => state.chef.currentDraft);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -50,7 +47,6 @@ const RecipeCreatePage = ({}) => {
       .then((res) => {
         if (res.status === 200) {
           dispatch(chefActions.initializeDraft(res.data));
-          // setRecipe(currentDraft);
         } else {
           dispatch(alertActions.setErrorMessage(res.error.message));
         }
@@ -86,7 +82,6 @@ const RecipeCreatePage = ({}) => {
 
   return (
     <>
-      {/* <AlertPopup /> */}
       {!recipe.isPublished && (
         <Banner label="This recipe is unpublished. It will not be visible to the public." />
       )}

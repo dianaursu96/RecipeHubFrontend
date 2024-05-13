@@ -6,7 +6,6 @@ const initialState = {
   firstName: "",
   lastName: "",
   email: "",
-  // password: "",
   role: "",
   favourites: [],
 };
@@ -25,7 +24,6 @@ const authSlice = createSlice({
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
       state.email = action.payload.email;
-      // state.password = action.payload.password;
       state.role = action.payload.role;
       state.favourites = action.payload.favourites;
     },

@@ -6,7 +6,6 @@ import { Pencil } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../../redux/store/chef-slice";
 import { alertActions } from "../../../redux/store/alert-slice";
-import AlertPopup from "../../../UI/components/AlertPopup";
 
 const ImageForm = ({ initialData, recipeId }) => {
   const token = useSelector((state) => state.auth.token);
@@ -53,7 +52,6 @@ const ImageForm = ({ initialData, recipeId }) => {
         marginTop: "10px",
       }}
     >
-      {/* <AlertPopup /> */}
       <div
         style={{
           display: "flex",

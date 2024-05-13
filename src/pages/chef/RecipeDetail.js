@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { FaFireAlt, FaRegClock, FaHeart, FaArrowLeft } from "react-icons/fa";
-import { IoIosCheckbox } from "react-icons/io";
+import { FaFireAlt, FaRegClock, FaArrowLeft } from "react-icons/fa";
 import classes from "./RecipeDetail.module.css";
 import book from "../../assets/images/book.png";
 import ingredientImage from "../../assets/images/ingredients.png";
@@ -14,7 +13,6 @@ import { alertActions } from "../../redux/store/alert-slice";
 import { CiCircleCheck } from "react-icons/ci";
 
 const RecipeDetail = () => {
-  const recipes = useSelector((state) => state.reader.recipes);
   const error = useSelector((state) => state.alert.hasError);
   const [recipe, setRecipe] = useState({});
   const token = useSelector((state) => state.auth.token);
@@ -90,7 +88,6 @@ const RecipeDetail = () => {
 
   return (
     <Fragment>
-      {/* <AlertPopup /> */}
       {isLoading && <Spinner />}
       <main id="main-content" className="main-content-container">
         {error && <h1>Error: {error.message}</h1>}

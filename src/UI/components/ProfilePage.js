@@ -1,11 +1,10 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./ProfilePage.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../redux/store/auth-slice";
 import { alertActions } from "../../redux/store/alert-slice";
-import AlertPopup from "./AlertPopup";
 
 const ProfilePage = () => {
   const { firstName, lastName, email } = useSelector((state) => state.auth);
@@ -55,7 +54,6 @@ const ProfilePage = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      // then update user call to backend
       try {
         const res = await axios.put("http://localhost:8081/update", formData, {
           headers: {
@@ -82,7 +80,6 @@ const ProfilePage = () => {
             );
 
             navigate("/");
-            // Redirect to a success page or refresh current page
           } else {
             dispatch(authActions.logout());
             navigate("/login");
@@ -102,7 +99,6 @@ const ProfilePage = () => {
 
   return (
     <div className={classes.profile__container}>
-      {/* <AlertPopup /> */}
       <h1>Edit your profile info</h1>
       <form
         onSubmit={handleSubmit}

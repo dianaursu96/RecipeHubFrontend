@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useForm } from "react-hook-form";
 import { Button } from "@mui/material";
 import { Pencil } from "lucide-react";
 import DurationPicker from "react-duration-picker";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../../redux/store/chef-slice";
 import { alertActions } from "../../../redux/store/alert-slice";
-import AlertPopup from "../../../UI/components/AlertPopup";
 
 const CookingTimeForm = ({ initialData, recipeId }) => {
   const token = useSelector((state) => state.auth.token);
@@ -19,10 +17,7 @@ const CookingTimeForm = ({ initialData, recipeId }) => {
     setCookingTime(hours * 60 + minutes);
   };
   const convertMinutesToHoursAndMinutes = (initialCookingTime) => {
-    // Calculate the number of whole hours
     const hours = Math.floor(initialCookingTime / 60);
-
-    // Calculate the remaining minutes
     const minutes = initialCookingTime % 60;
 
     return {
@@ -73,7 +68,6 @@ const CookingTimeForm = ({ initialData, recipeId }) => {
         marginTop: "10px",
       }}
     >
-      {/* <AlertPopup /> */}
       <div
         style={{
           display: "flex",

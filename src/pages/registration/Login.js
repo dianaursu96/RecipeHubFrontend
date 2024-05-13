@@ -7,7 +7,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../redux/store/auth-slice";
 import { readerActions } from "../../redux/store/reader-slice";
-import AlertPopup from "../../UI/components/AlertPopup";
 import { alertActions } from "../../redux/store/alert-slice";
 
 const Login = () => {
@@ -15,7 +14,6 @@ const Login = () => {
   const passwordRef = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [errorMessage, setErrorMessage] = useState("");
   const onLoginHandler = (e) => {
     e.preventDefault();
     axios
@@ -34,7 +32,6 @@ const Login = () => {
               email: res.data.email,
               firstName: res.data.firstName,
               lastName: res.data.lastName,
-              // password: res.data.password,
               role: res.data.role,
               favourites: res.data.favourites,
             })
@@ -54,7 +51,6 @@ const Login = () => {
   };
   return (
     <div className={classes.login__container}>
-      {/* <AlertPopup /> */}
       <Logo />
       <form
         onSubmit={onLoginHandler}

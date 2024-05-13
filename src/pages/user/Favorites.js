@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./components/MainContent.css";
 import { useDispatch, useSelector } from "react-redux";
-import { readerActions, recipeActions } from "../../redux/store/reader-slice";
+import { readerActions } from "../../redux/store/reader-slice";
 import MainContent from "./components/MainContent";
 import Spinner from "../../UI/components/Spinner";
 import axios from "axios";
 import { alertActions } from "../../redux/store/alert-slice";
-import AlertPopup from "../../UI/components/AlertPopup";
 
 const Favorites = () => {
   const error = useSelector((state) => state.alert.hasError);
@@ -43,7 +42,6 @@ const Favorites = () => {
       });
   }, []);
 
-  // CONDITIONAL RENDERS
   const banner =
     favorites.length > 0 ? (
       <h1>
@@ -57,7 +55,6 @@ const Favorites = () => {
 
   return (
     <>
-      {/* <AlertPopup /> */}
       <div className="banner-container" id="recipes">
         <div className="banner-title">{banner}</div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaFireAlt, FaRegClock, FaHeart } from "react-icons/fa";
 import "./RecipeItem.css";
@@ -7,7 +7,6 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { readerActions } from "../../../redux/store/reader-slice";
 import { alertActions } from "../../../redux/store/alert-slice";
-import AlertPopup from "../../../UI/components/AlertPopup";
 
 const RecipeItem = ({
   id,
@@ -48,7 +47,6 @@ const RecipeItem = ({
           dispatch(readerActions.initializeFavourites(res.data));
           let userObject = JSON.parse(localStorage.getItem("userData"));
           userObject.favourites = res.data;
-          // Store the updated user data back in localStorage
           localStorage.setItem("userData", JSON.stringify(userObject));
         } else {
           dispatch(alertActions.setErrorMessage(res.error.message));
@@ -61,7 +59,6 @@ const RecipeItem = ({
 
   return (
     <Card className="recipe-item-container">
-      {/* <AlertPopup /> */}
       <div className="recipe-card-header">
         <div>
           <Link

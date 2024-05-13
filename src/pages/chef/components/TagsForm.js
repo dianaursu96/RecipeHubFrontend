@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { TextField, Button, IconButton, ButtonBase } from "@mui/material";
-import { Pencil, Trash } from "lucide-react";
+import { TextField, Button } from "@mui/material";
+import { Pencil } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { chefActions } from "../../../redux/store/chef-slice";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { alertActions } from "../../../redux/store/alert-slice";
-import AlertPopup from "../../../UI/components/AlertPopup";
 
 const TagsForm = ({ initialData, recipeId }) => {
   const token = useSelector((state) => state.auth.token);
@@ -15,10 +14,7 @@ const TagsForm = ({ initialData, recipeId }) => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [tags, setTags] = useState(
-    initialData.tags
-      ? initialData.tags.split(",")
-      : // .map((tag) => (tag.startsWith("#") ? tag : `#${tag}`))
-        []
+    initialData.tags ? initialData.tags.split(",") : []
   );
   const [newTag, setNewTag] = useState("");
 
@@ -78,7 +74,6 @@ const TagsForm = ({ initialData, recipeId }) => {
         marginTop: "10px",
       }}
     >
-      {/* <AlertPopup /> */}
       <div
         style={{
           display: "flex",

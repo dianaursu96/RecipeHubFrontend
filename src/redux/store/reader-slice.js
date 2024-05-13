@@ -33,16 +33,6 @@ const readerSlice = createSlice({
 
       state.recipes = transformedSearchRecipe;
     },
-    // addToFavorites(state, action) {
-    //   state.favourites = [...state.favourites, action.payload];
-    // },
-    // removeFromFavorites(state, action) {
-    //   const recipeID = action.payload;
-    //   const filteredFavorites = state.favourites.filter(
-    //     (id) => id !== recipeID
-    //   );
-    //   state.favourites = filteredFavorites;
-    // },
   },
 });
 export const readerActions = readerSlice.actions;

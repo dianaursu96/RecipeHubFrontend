@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import Registration from "./pages/registration/Registration";
 import Login from "./pages/registration/Login";
 import SignUp from "./pages/registration/SignUp";
@@ -43,10 +43,7 @@ function App() {
 
   const menuItemsReader = [
     { label: "Home", path: "/", icon: <FaHome /> },
-    // { label: "Recipes", path: "/recipes", icon: <FaUtensils /> },
     { label: "Favourites", path: "/favorites", icon: <FaHeart /> },
-    // { label: "References", path: "/references", icon: <FaBookOpen /> },
-    // { label: "FAQ", path: "/faq", icon: <FaQuestionCircle /> },
   ];
   const menuItemsAdmin = [{ label: "Home", path: "/", icon: <FaHome /> }];
 

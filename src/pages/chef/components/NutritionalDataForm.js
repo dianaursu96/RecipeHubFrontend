@@ -19,7 +19,7 @@ const NutritionalDataForm = ({ initialData, recipeId }) => {
             100,
         ]
       : [33.33, 66.67]
-  ); // initial percentages for fats, carbs, and proteins
+  ); // initial percentages for fats, carbs, and proteins on the slider
   const [calories, setCalories] = useState(initialData.calories ?? 0);
   const [proteins, setProteins] = useState(initialData.protein ?? 0);
   const [carbs, setCarbs] = useState(initialData.carb ?? 0);

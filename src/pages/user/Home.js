@@ -6,7 +6,6 @@ import Spinner from "../../UI/components/Spinner";
 import SearchRecipe from "./components/SearchRecipe";
 import axios from "axios";
 import CategoryBar from "./components/CategoryBar";
-import AlertPopup from "../../UI/components/AlertPopup";
 import { alertActions } from "../../redux/store/alert-slice";
 
 const Home = () => {
@@ -63,7 +62,6 @@ const Home = () => {
 
   return (
     <>
-      {/* <AlertPopup /> */}
       <div className="banner-container" id="recipes">
         <div className="banner-title">{banner}</div>
         <SearchRecipe className="search__container" />

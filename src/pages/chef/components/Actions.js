@@ -6,7 +6,6 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../../redux/store/chef-slice";
 import { alertActions } from "../../../redux/store/alert-slice";
-import AlertPopup from "../../../UI/components/AlertPopup";
 
 const Actions = ({ disabled, recipeId, isPublished }) => {
   const token = useSelector((state) => state.auth.token);
@@ -73,7 +72,6 @@ const Actions = ({ disabled, recipeId, isPublished }) => {
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-      {/* <AlertPopup /> */}
       <Button
         onClick={handlePublish}
         disabled={disabled || isLoading}

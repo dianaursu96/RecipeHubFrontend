@@ -5,7 +5,6 @@ import Logo from "../../UI/components/Logo";
 import classes from "./SignUp.module.css";
 import { alertActions } from "../../redux/store/alert-slice";
 import { useDispatch } from "react-redux";
-import AlertPopup from "../../UI/components/AlertPopup";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -86,7 +85,6 @@ const SignUp = () => {
 
   return (
     <div className={classes.signup__container}>
-      {/* <AlertPopup /> */}
       <Logo />
       <form
         onSubmit={handleSubmit}

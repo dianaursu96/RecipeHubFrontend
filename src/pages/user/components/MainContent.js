@@ -4,7 +4,6 @@ import "./MainContent.css";
 import Pagination from "./Pagination";
 
 const MainContent = ({ recipes }) => {
-  // PAGINATION LOGIC
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 4;
   const indexOfLastRecipe = currentPage * recipesPerPage;

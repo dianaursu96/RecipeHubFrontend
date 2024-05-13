@@ -6,23 +6,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Badge from "@mui/material/Badge";
-import IconButton from "@mui/material/IconButton";
+
 import Button from "@mui/material/Button";
-import { FaEdit, FaBook, FaPlus, FaUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../../UI/components/Spinner";
-// Modal components
-import { FormControl, InputLabel, Input, Modal } from "@mui/material";
+import { FormControl, InputLabel } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { chefActions } from "../../redux/store/chef-slice";
-import { RotateCwSquare } from "lucide-react";
 import { MdOutlineModeEdit as EditIcon } from "react-icons/md";
 import { IoIosSave as SaveIcon } from "react-icons/io";
-import AlertPopup from "../../UI/components/AlertPopup";
 import { alertActions } from "../../redux/store/alert-slice";
 
 const roles = [
@@ -118,7 +112,6 @@ const RecipesTable = () => {
 
   return (
     <div>
-      {/* <AlertPopup /> */}
       {isEditing ? (
         <Button
           variant="contained"

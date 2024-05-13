@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-// import Footer from './Footer';
 import { FaBars, FaAngleLeft } from "react-icons/fa";
 import { IconButton, Divider } from "@mui/material";
 import classes from "./Layout.module.css";

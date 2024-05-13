@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { readerActions } from "../../redux/store/reader-slice";
 import MainContent from "./components/MainContent";
 import Spinner from "../../UI/components/Spinner";
 import axios from "axios";
 import { alertActions } from "../../redux/store/alert-slice";
-import AlertPopup from "../../UI/components/AlertPopup";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -52,7 +50,6 @@ const Home = () => {
 
   return (
     <>
-      {/* <AlertPopup /> */}
       <div className="banner-container" id="recipes">
         <div className="banner-title">{banner}</div>
       </div>
