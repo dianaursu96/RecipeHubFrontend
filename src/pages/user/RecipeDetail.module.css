@@ -9,8 +9,8 @@
   grid-template-areas:
     "recipe-details"
     "recipe-image"
-    "recipe-prep"
     "recipe-ingredients"
+    "recipe-prep"
     "recipe-nutrition"
     "cta-buttons";
   row-gap: 30px;
@@ -44,6 +44,7 @@
   font-size: 1.8rem;
   margin-bottom: 0.2em;
   font-weight: 900;
+  padding-left: 10px;
 }
 
 .recipe-details i {
@@ -316,7 +317,6 @@ span {
   }
 
   .recipe-ingredients span {
-    justify-content: center;
     display: flex;
     margin-top: auto;
     flex-wrap: wrap;
@@ -327,7 +327,7 @@ span {
   .recipe-ingredients ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 5px;
   }
 }
 
@@ -337,9 +337,9 @@ span {
     padding-top: 5em;
     padding-bottom: 5em;
     grid-auto-columns: 1fr;
-    grid-template-columns: 1fr 0.9fr 1.1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 
-    row-gap: 60px;
+    row-gap: 70px;
     grid-template-areas:
       "recipe-image recipe-image recipe-details"
       "recipe-image recipe-image cta-buttons"
@@ -372,9 +372,12 @@ span {
     font-size: 1.4em;
   }
 
-  .recipe-nutritional-facts li,
+  .recipe-nutritional-facts li {
+    font-size: 1.7em;
+  }
+
   .recipe-ingredients li {
-    font-size: 1.6em;
+    font-size: 1.5em;
   }
 
   .favorites-button-group {

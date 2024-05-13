@@ -98,12 +98,25 @@ const RecipeCreatePage = ({}) => {
             alignItems: "center",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+              marginLeft: "15px",
+            }}
+          >
+            <h1
+              style={{
+                fontSize: "40px",
+                fontWeight: "bold",
+                color: "var(--secondary)",
+              }}
+            >
               Recipe setup
             </h1>
-            <span style={{ fontSize: "14px", color: "#4b5563" }}>
-              Complete all fields ({completedFields}/{totalFields})
+            <span style={{ fontSize: "20px", color: "var(---secondary)" }}>
+              <b>Complete all fields</b> ({completedFields}/{totalFields})
             </span>
           </div>
           <Actions

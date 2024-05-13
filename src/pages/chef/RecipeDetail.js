@@ -11,7 +11,7 @@ import Spinner from "../../UI/components/Spinner";
 import { MdLocalFireDepartment } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { alertActions } from "../../redux/store/alert-slice";
-import AlertPopup from "../../UI/components/AlertPopup";
+import { CiCircleCheck } from "react-icons/ci";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state) => state.reader.recipes);
@@ -60,7 +60,7 @@ const RecipeDetail = () => {
   const ingredients = recipe?.ingredients?.split("|").map((ingredient) => (
     <li>
       <span>
-        <IoIosCheckbox />
+        <CiCircleCheck />
         {ingredient}
       </span>
     </li>

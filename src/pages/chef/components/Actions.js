@@ -28,7 +28,13 @@ const Actions = ({ disabled, recipeId, isPublished }) => {
       })
         .then((res) => {
           if (res.status === 200) {
-            dispatch(alertActions.setSuccessMessage("Operation successful!"));
+            dispatch(
+              alertActions.setSuccessMessage(
+                isPublished
+                  ? "Your recipe is now unpublished."
+                  : "Recipe published successfully!"
+              )
+            );
             dispatch(chefActions.initializeDraft(res.data));
           } else {
             dispatch(alertActions.setErrorMessage(res.error.message));
@@ -106,25 +112,57 @@ const Actions = ({ disabled, recipeId, isPublished }) => {
         aria-labelledby="delete-modal-title"
         aria-describedby="delete-modal-description"
       >
-        <div style={{ backgroundColor: "white", padding: "20px" }}>
-          <h2 id="delete-modal-title">Confirm Delete</h2>
-          <p id="delete-modal-description">
+        <div style={{ backgroundColor: "var(--inverse)", padding: "20px" }}>
+          <h1 id="delete-modal-title">Confirm Delete</h1>
+          <h2 id="delete-modal-description">
             Are you sure you want to delete this recipe?
-          </p>
+          </h2>
           <div
             style={{
               display: "flex",
-              justifyContent: "flex-end",
+              justifyContent: "flex-center",
               marginTop: "20px",
             }}
           >
-            <Button onClick={handleDelete} color="secondary" variant="outlined">
+            <Button
+              onClick={handleDelete}
+              variant="outlined"
+              style={{
+                marginTop: "10px",
+                background: "var(--primary)",
+                color: "var(--inverse)",
+                fontFamily: "var(--font-family)",
+                fontWeight: "bold",
+                borderRadius: "8%",
+                borderColor: "var(--primary)",
+                textTransform: "None",
+                "&:hover": {
+                  background: "var(--primary)",
+                  color: "var(--inverse)",
+                },
+              }}
+            >
               Delete
             </Button>
+
             <Button
               onClick={() => setOpenModal(false)}
-              color="primary"
               variant="outlined"
+              style={{
+                marginTop: "10px",
+                background: "var(--inverse)",
+                color: "var(--primary)",
+                fontFamily: "var(--font-family)",
+                fontWeight: "bold",
+                borderRadius: "8%",
+                borderColor: "var(--primary)",
+                textTransform: "None",
+                marginLeft: "20px",
+                "&:hover": {
+                  background: "var(--primary)",
+                  color: "var(--inverse)",
+                },
+              }}
             >
               Cancel
             </Button>

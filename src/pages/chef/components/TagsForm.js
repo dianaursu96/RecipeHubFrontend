@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, IconButton } from "@mui/material";
+import { TextField, Button, IconButton, ButtonBase } from "@mui/material";
 import { Pencil, Trash } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -16,10 +16,9 @@ const TagsForm = ({ initialData, recipeId }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [tags, setTags] = useState(
     initialData.tags
-      ? initialData.tags
-          .split(",")
-          .map((tag) => (tag.startsWith("#") ? tag : `#${tag}`))
-      : []
+      ? initialData.tags.split(",")
+      : // .map((tag) => (tag.startsWith("#") ? tag : `#${tag}`))
+        []
   );
   const [newTag, setNewTag] = useState("");
 
@@ -109,8 +108,14 @@ const TagsForm = ({ initialData, recipeId }) => {
               <Chip
                 key={index}
                 label={`#${tag}`}
+                variant="outlined"
                 onDelete={() => handleDeleteTag(index)}
-                style={{ margin: "5px" }}
+                size="6px"
+                style={{
+                  margin: "2px",
+                  color: "var(--secondary)",
+                  borderColor: "var(--secondary)",
+                }}
               />
             ))}
           </Stack>
@@ -173,7 +178,12 @@ const TagsForm = ({ initialData, recipeId }) => {
       ) : (
         <Stack direction="row" spacing={1}>
           {tags.map((tag, index) => (
-            <Chip key={index} label={`#${tag}`} style={{ margin: "5px" }} />
+            <Chip
+              key={index}
+              variant="outlined"
+              label={`#${tag}`}
+              style={{ margin: "3px", color: "var(--secondary)" }}
+            />
           ))}
         </Stack>
       )}

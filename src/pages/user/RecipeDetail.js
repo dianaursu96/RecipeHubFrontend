@@ -5,6 +5,8 @@ import classes from "./RecipeDetail.module.css";
 import book from "../../assets/images/book.png";
 import ingredientImage from "../../assets/images/ingredients.png";
 import nutritionImage from "../../assets/images/nutirtion.png";
+import { CiCircleCheck } from "react-icons/ci";
+import { Check } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../../UI/components/Spinner";
@@ -12,7 +14,6 @@ import { MdLocalFireDepartment } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { readerActions } from "../../redux/store/reader-slice";
 import { alertActions } from "../../redux/store/alert-slice";
-import AlertPopup from "../../UI/components/AlertPopup";
 
 const RecipeDetail = () => {
   const recipes = useSelector((state) => state.reader.recipes);
@@ -67,7 +68,7 @@ const RecipeDetail = () => {
   const ingredients = recipe?.ingredients?.split("|").map((ingredient) => (
     <li>
       <span>
-        <IoIosCheckbox />
+        <CiCircleCheck />
         {ingredient}
       </span>
     </li>

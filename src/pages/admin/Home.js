@@ -188,14 +188,24 @@ const RecipesTable = () => {
               {rows?.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell component="th" scope="row">
-                    <span>
-                      <FaUser /> {row.firstName}
+                    <span style={{ marginRight: "15px" }}>
+                      <FaUser />
                     </span>
+                    <b>{row.firstName}</b>
                   </TableCell>
-                  <TableCell align="right">{row.lastName}</TableCell>
-                  <TableCell align="right">{row.email}</TableCell>
                   <TableCell align="right">
-                    {!isEditing && row.role}
+                    <b>{row.lastName}</b>
+                  </TableCell>
+                  <TableCell align="right">
+                    <b>{row.email}</b>
+                  </TableCell>
+                  <TableCell align="right">
+                    {!isEditing && (
+                      <b>
+                        {row.role.charAt(0).toUpperCase() +
+                          row.role.slice(1).toLowerCase()}
+                      </b>
+                    )}
                     {isEditing && (
                       <>
                         <FormControl>

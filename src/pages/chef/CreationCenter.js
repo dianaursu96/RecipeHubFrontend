@@ -10,6 +10,7 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import { FaEdit, FaBook, FaPlus } from "react-icons/fa";
+import { FaUtensils } from "react-icons/fa6";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
@@ -177,9 +178,10 @@ const RecipesTable = () => {
               {rows?.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell component="th" scope="row">
-                    <span>
-                      <FaBook /> {row.title}
+                    <span style={{ marginRight: "15px", fontSize: "large" }}>
+                      <FaUtensils />
                     </span>
+                    <b>{row.title}</b>
                   </TableCell>
                   <TableCell align="right">
                     {
