@@ -33,7 +33,7 @@ const RecipeItem = ({
   const favouriteHandler = () => {
     axios({
       method: favorited ? "DELETE" : "POST",
-      url: `http://localhost:8081/reader/favourites/${
+      url: `https://recipe-hub-srv-9501da59a43f.herokuapp.com/reader/favourites/${
         favorited ? "delete" : "add"
       }?recipeId=${id}`,
       headers: {

@@ -39,7 +39,7 @@ const RecipeCreatePage = ({}) => {
     setIsLoading(true);
     axios({
       method: "GET",
-      url: `http://localhost:8081/chef/recipes/${recipeId}`,
+      url: `https://recipe-hub-srv-9501da59a43f.herokuapp.com/chef/recipes/${recipeId}`,
       headers: {
         Authorization: "Bearer " + token,
       },

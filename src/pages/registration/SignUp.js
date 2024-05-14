@@ -61,7 +61,7 @@ const SignUp = () => {
     if (validateForm()) {
       try {
         const res = await axios.post(
-          "http://localhost:8081/register",
+          "https://recipe-hub-srv-9501da59a43f.herokuapp.com/register",
           formData
         );
 

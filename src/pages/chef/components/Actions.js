@@ -20,7 +20,7 @@ const Actions = ({ disabled, recipeId, isPublished }) => {
 
       axios({
         method: "PUT",
-        url: `http://localhost:8081/chef/recipes/publish/${recipeId}`,
+        url: `https://recipe-hub-srv-9501da59a43f.herokuapp.com/chef/recipes/publish/${recipeId}`,
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -56,7 +56,7 @@ const Actions = ({ disabled, recipeId, isPublished }) => {
       setIsLoading(true);
       await axios({
         method: "DELETE",
-        url: `http://localhost:8081/chef/recipes/delete/${recipeId}`,
+        url: `https://recipe-hub-srv-9501da59a43f.herokuapp.com/chef/recipes/delete/${recipeId}`,
         headers: {
           Authorization: "Bearer " + token,
         },

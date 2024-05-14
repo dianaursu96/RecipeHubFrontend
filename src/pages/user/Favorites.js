@@ -19,7 +19,7 @@ const Favorites = () => {
     setIsLoading(true);
     axios({
       method: "GET",
-      url: `http://localhost:8081/reader/recipes/favourites`,
+      url: `https://recipe-hub-srv-9501da59a43f.herokuapp.com/reader/recipes/favourites`,
       headers: {
         Authorization: "Bearer " + token,
       },

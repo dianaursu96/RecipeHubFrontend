@@ -55,11 +55,15 @@ const ProfilePage = () => {
 
     if (validateForm()) {
       try {
-        const res = await axios.put("http://localhost:8081/update", formData, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
+        const res = await axios.put(
+          "https://recipe-hub-srv-9501da59a43f.herokuapp.com/update",
+          formData,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
         if (res.status === 200) {
           dispatch(alertActions.setSuccessMessage("Operation successful!"));
           dispatch(

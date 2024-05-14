@@ -28,7 +28,7 @@ const RecipeDetail = () => {
     setIsLoading(true);
     axios({
       method: "GET",
-      url: `http://localhost:8081/chef/recipes/${id}`,
+      url: `https://recipe-hub-srv-9501da59a43f.herokuapp.com/chef/recipes/${id}`,
       headers: {
         Authorization: "Bearer " + token,
       },

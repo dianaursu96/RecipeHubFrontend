@@ -66,7 +66,7 @@ const RecipesTable = () => {
 
     axios({
       method: "PUT",
-      url: `http://localhost:8081/admin/users/update/roles`,
+      url: `https://recipe-hub-srv-9501da59a43f.herokuapp.com/admin/users/update/roles`,
       data: rolesToUpdate,
       headers: {
         Authorization: "Bearer " + token,
@@ -91,7 +91,7 @@ const RecipesTable = () => {
     setIsLoading(true);
     axios({
       method: "GET",
-      url: `http://localhost:8081/admin/users/all`,
+      url: `https://recipe-hub-srv-9501da59a43f.herokuapp.com/admin/users/all`,
       headers: {
         Authorization: "Bearer " + token,
       },

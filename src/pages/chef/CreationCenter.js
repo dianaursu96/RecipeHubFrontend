@@ -60,7 +60,7 @@ const RecipesTable = () => {
     setIsLoading(true);
     axios({
       method: "GET",
-      url: `http://localhost:8081/chef/recipes/all`,
+      url: `https://recipe-hub-srv-9501da59a43f.herokuapp.com/chef/recipes/all`,
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -94,7 +94,7 @@ const RecipesTable = () => {
     };
     axios({
       method: "POST",
-      url: `http://localhost:8081/chef/recipes/create`,
+      url: `https://recipe-hub-srv-9501da59a43f.herokuapp.com/chef/recipes/create`,
       data: newRecipe,
       headers: {
         Authorization: "Bearer " + token,

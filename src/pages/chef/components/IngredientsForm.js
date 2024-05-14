@@ -30,7 +30,7 @@ const IngredientsForm = ({ initialData, recipeId }) => {
       const formattedIngredients = ingredients.join("|"); // Join all ingredients into a single string separated by '|'
       axios({
         method: "PUT",
-        url: `http://localhost:8081/chef/recipes/update/${recipeId}`,
+        url: `https://recipe-hub-srv-9501da59a43f.herokuapp.com/chef/recipes/update/${recipeId}`,
         data: { ingredients: formattedIngredients },
         headers: {
           Authorization: "Bearer " + token,

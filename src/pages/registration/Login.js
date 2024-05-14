@@ -17,7 +17,7 @@ const Login = () => {
   const onLoginHandler = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:8081/login`, {
+      .post(`https://recipe-hub-srv-9501da59a43f.herokuapp.com/login`, {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       })
