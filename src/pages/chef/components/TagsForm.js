@@ -98,18 +98,25 @@ const TagsForm = ({ initialData, recipeId }) => {
 
       {isEditing ? (
         <div>
-          <Stack direction="row" spacing={1}>
+          <Stack
+            sx={{ flexWrap: "wrap", rowGap: "10px" }}
+            direction="row"
+            spacing={1}
+          >
             {tags.map((tag, index) => (
               <Chip
                 key={index}
                 label={`#${tag}`}
                 variant="outlined"
                 onDelete={() => handleDeleteTag(index)}
-                size="6px"
-                style={{
-                  margin: "2px",
-                  color: "var(--secondary)",
-                  borderColor: "var(--secondary)",
+                size="small"
+                sx={{
+                  borderRadius: "8px !important",
+                  color: "var(--inverse) !important",
+                  borderColor: "var(--primary) !important",
+                  backgroundColor: "var(--primary) !important",
+                  fontSize: "1.4em !important",
+                  padding: "0.8em 0.6em !important",
                 }}
               />
             ))}
@@ -171,13 +178,24 @@ const TagsForm = ({ initialData, recipeId }) => {
           </Button>
         </div>
       ) : (
-        <Stack direction="row" spacing={1}>
+        <Stack
+          sx={{ flexWrap: "wrap", rowGap: "10px" }}
+          direction="row"
+          spacing={1}
+        >
           {tags.map((tag, index) => (
             <Chip
               key={index}
               variant="outlined"
               label={`#${tag}`}
-              style={{ margin: "3px", color: "var(--secondary)" }}
+              sx={{
+                borderRadius: "8px !important",
+                color: "var(--inverse) !important",
+                borderColor: "var(--primary) !important",
+                backgroundColor: "var(--primary) !important",
+                fontSize: "1.4em !important",
+                padding: "0.6em 0.4em !important",
+              }}
             />
           ))}
         </Stack>

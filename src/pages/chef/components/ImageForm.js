@@ -61,7 +61,7 @@ const ImageForm = ({ initialData, recipeId }) => {
           fontSize: "small",
         }}
       >
-        <span>Edit image:</span>
+        <span>Edit image URL:</span>
         <Button
           onClick={() => setIsEditing(!isEditing)}
           style={{ color: "var(--primary)", borderColor: "var(--primary)" }}

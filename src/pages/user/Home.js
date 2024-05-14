@@ -66,10 +66,10 @@ const Home = () => {
         <div className="banner-title">{banner}</div>
         <SearchRecipe className="search__container" />
       </div>
+      <CategoryBar />
       {isLoading && <Spinner />}
       {!isLoading && !error && (
         <>
-          <CategoryBar />
           <MainContent recipes={recipes} />
         </>
       )}

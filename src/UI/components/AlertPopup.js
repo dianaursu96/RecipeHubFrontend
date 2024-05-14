@@ -10,7 +10,7 @@ const AlertPopup = () => {
   const alertOpen = useSelector((state) => state.alert.alertOpen);
   const dispatch = useDispatch();
   return (
-    <div class="alert">
+    <div className="alert">
       <Snackbar
         open={alertOpen}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}

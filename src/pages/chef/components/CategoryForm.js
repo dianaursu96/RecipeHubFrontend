@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { Button, MenuItem, Select } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import { Pencil } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../../redux/store/chef-slice";
@@ -97,20 +103,21 @@ const CategoryForm = ({ initialData, recipeId }) => {
       </div>
       {isEditing ? (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Select
-            {...register("category")}
-            select
-            label="Category"
-            fullWidth
-            variant="outlined"
-            margin="normal"
-          >
-            {options.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
+          <FormControl fullWidth>
+            <Select
+              {...register("category")}
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              defaultValue={initialData.category}
+            >
+              {options.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Button
             type="submit"
             variant="contained"
