@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ListItemButton, ListItemText, IconButton } from "@mui/material";
 import { NavLink, useLocation } from "react-router-dom";
 import "./Sidebar.css";
@@ -10,6 +10,10 @@ const Sidebar = ({ menuItems, collapsed }) => {
   const handleItemClick = (path) => {
     setActivePath(path);
   };
+
+  useEffect(() => {
+    setActivePath(location.pathname);
+  }, [location]);
 
   return (
     <nav className="sidebar">
