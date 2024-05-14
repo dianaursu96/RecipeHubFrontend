@@ -60,7 +60,11 @@ const CategoryBar = () => {
 
   return (
     <div className="categoryBar">
-      <Stack direction="row" spacing={2.5} sx={{ marginLeft: 5 }}>
+      <Stack
+        sx={{ flexWrap: "wrap", rowGap: "10px", marginLeft: 5 }}
+        direction="row"
+        spacing={2.5}
+      >
         {categories.map((category, index) => (
           <Chip
             key={index}

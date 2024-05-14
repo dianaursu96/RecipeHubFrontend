@@ -71,54 +71,69 @@ const Actions = ({ disabled, recipeId, isPublished }) => {
   };
 
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-      <Button
-        onClick={handlePublish}
-        disabled={disabled || isLoading}
-        variant="contained"
-        startIcon={isPublished ? <BookX /> : <BookCheck />}
-        style={{
-          background: "var(--inverse)",
-          float: "right",
-          padding: "1em",
-          margin: "1.3em",
-          color: "var(--primary)",
-          fontFamily: "var(--font-family)",
-          fontWeight: "bold",
-          borderRadius: "7%",
-          textTransform: "None",
-          "&:hover": {
-            background: "var(--primary)",
-            color: "var(--inverse)",
-          },
-        }}
-      >
-        {isPublished ? "Unpublish" : "Publish"}
-      </Button>
-      <Button
-        onClick={() => setOpenModal(true)}
-        size="small"
-        disabled={isLoading}
-      >
-        <Trash
-          style={{ color: "var(--primary)", width: "20px", height: "20px" }}
-        />
-      </Button>
+    <div>
+      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <Button
+          onClick={handlePublish}
+          disabled={disabled || isLoading}
+          variant="contained"
+          startIcon={isPublished ? <BookX /> : <BookCheck />}
+          style={{
+            background: "var(--inverse)",
+            float: "right",
+            padding: "1em",
+            margin: "1.3em",
+            color: "var(--primary)",
+            fontFamily: "var(--font-family)",
+            fontWeight: "bold",
+            borderRadius: "7%",
+            opacity: disabled || isLoading ? 0.6 : 1,
+            textTransform: "None",
+            "&:hover": {
+              background: "var(--primary)",
+              color: "var(--inverse)",
+            },
+          }}
+        >
+          {isPublished ? "Unpublish" : "Publish"}
+        </Button>
+        <Button
+          onClick={() => setOpenModal(true)}
+          size="small"
+          disabled={isLoading}
+        >
+          <Trash
+            style={{ color: "var(--primary)", width: "20px", height: "20px" }}
+          />
+        </Button>
+      </div>
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}
         aria-labelledby="delete-modal-title"
         aria-describedby="delete-modal-description"
       >
-        <div style={{ backgroundColor: "var(--inverse)", padding: "20px" }}>
-          <h1 id="delete-modal-title">Confirm Delete</h1>
-          <h2 id="delete-modal-description">
-            Are you sure you want to delete this recipe?
-          </h2>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "var(--inverse)",
+            padding: "20px",
+          }}
+        >
+          <>
+            <h1 id="delete-modal-title">Confirm Delete</h1>
+            <h2 id="delete-modal-description">
+              Are you sure you want to delete this recipe?
+            </h2>
+          </>
           <div
             style={{
               display: "flex",
-              justifyContent: "flex-center",
+              flexDirection: "row",
+              justifyContent: "center",
               marginTop: "20px",
             }}
           >

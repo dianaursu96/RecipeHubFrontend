@@ -179,7 +179,7 @@ const RecipesTable = () => {
             </TableHead>
             <TableBody>
               {rows?.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow hover key={row.id}>
                   <TableCell component="th" scope="row">
                     <span style={{ marginRight: "15px" }}>
                       <FaUser />

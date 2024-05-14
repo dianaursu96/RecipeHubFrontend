@@ -16,7 +16,6 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../../UI/components/Spinner";
-// Modal components
 import { FormControl, InputLabel, Input, Modal, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { chefActions } from "../../redux/store/chef-slice";
@@ -174,7 +173,13 @@ const RecipesTable = () => {
             </TableHead>
             <TableBody>
               {rows?.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  sx={{ textDecoration: "none" }}
+                  hover
+                  component={Link}
+                  to={`/recipes/${row.id}`}
+                  key={row.id}
+                >
                   <TableCell component="th" scope="row">
                     <span style={{ marginRight: "15px", fontSize: "large" }}>
                       <FaUtensils />
